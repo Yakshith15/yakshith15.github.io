@@ -4,15 +4,15 @@ A modern, responsive personal website and blog built with [Next.js](https://next
 
 ## Live Site
 
-[https://yashagw.github.io/](https://yashagw.github.io/)
+[https://Yakshith15.github.io/](https://Yakshith15.github.io/)
 
 ## Quick Start Guide
 
 ### 1. Clone and Setup
 
 ```bash
-git clone https://github.com/yashagw/yashagw.github.io.git
-cd yashagw.github.io
+git clone https://github.com/Yakshith15/Yakshith15.github.io.git
+cd Yakshith15.github.io
 ```
 
 ### 2. Install Dependencies
