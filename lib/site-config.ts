@@ -14,6 +14,7 @@ export const navigation: Array<{ name: string; url: string; newTab?: boolean }> 
   { name: "Home", url: "/" },
   { name: "Projects", url: "/projects/" },
   { name: "Blog", url: "/blog/" },
+  { name: "Vault", url: "/vault/" },
 ];
 
 export const introParagraphs = [
@@ -162,11 +163,22 @@ export const companies = [
     url: "https://www.jpmorganchase.com",
     positions: [
       {
+        title: "Software Engineer I",
+        duration: "Jul 2025 – Present",
+        current: true,
+        points: [
+          "Built a hybrid search system combining lexical (BM25) and semantic vector retrieval, with a query router that picks the right strategy per query — lifted result relevance by ~40% over the lexical-only baseline.",
+          "Owned an ETL pipeline feeding a datalake — extracting from multiple upstream sources, transforming into the schema downstream needed, and powering dashboards that gave leadership clear visibility into project health and KPIs.",
+          "Integrated gRPC into a Go-based rate-limiting service, replacing the REST interface — cut p99 latency by ~60% and roughly 2× throughput under peak load.",
+        ],
+      },
+      {
         title: "Software Engineer Intern",
         duration: "Jan 2025 – Jul 2025",
         current: false,
         points: [
           "Contributed to an internal tool, API Marketplace Portal, on the frontend.",
+          "Migrated critical secrets from Kubernetes Secrets (base64-encoded, effectively readable by anyone with cluster access) to AWS Secrets Manager for proper encryption at rest, IAM-scoped access, and audit logging.",
         ],
       },
     ],
@@ -175,5 +187,4 @@ export const companies = [
 
 export const footerLinks = [
   { text: "GitHub", url: "https://github.com/Yakshith15" },
-  { text: "RSS", url: "/rss.xml" },
 ];
