@@ -1,7 +1,7 @@
 export const siteConfig = {
   title: "Yakshith Daggupati",
   description: "Personal website and blog of Yakshith Daggupati, Software Engineer",
-  baseUrl: "https://example.com",
+  baseUrl: "https://yakshith15.github.io",
   author: "Yakshith Daggupati",
   currentLocation: "Hyderabad, India",
   theme: {
@@ -81,6 +81,10 @@ export const projectCategories = [
 
 export type ProjectCategoryFilter = (typeof projectCategories)[number];
 
+// TODO: Replace with real shipped projects. Each entry should include a working
+// GitHub repo (githubUrl), and ideally a measured result (latency, throughput,
+// correctness benchmark) defensible in an interview. Add `demoUrl` / `designUrl`
+// only when the link actually resolves.
 export const projects: Project[] = [
   {
     name: "Google File System (GFS)",
@@ -91,9 +95,6 @@ export const projects: Project[] = [
     featured: true,
     language: "Go",
     tags: ["GFS", "Storage", "Replication", "Fault Tolerance"],
-    githubUrl: "https://github.com/Yakshith15",
-    demoUrl: "https://example.com/gfs-demo",
-    designUrl: "https://example.com/gfs-design",
     longDescription:
       "A hands-on reconstruction of the Google File System paper. The master coordinates chunk metadata and leases, chunkservers store 64MB chunks with configurable replication, and the client library handles chunk lookup and streaming reads/writes. Goal is to deeply understand consistency semantics, replica placement, and failure recovery.",
     highlights: [
@@ -101,48 +102,6 @@ export const projects: Project[] = [
       "Master election and heartbeat-driven chunkserver tracking",
       "Lease-based primary writes for consistency",
       "Simulated chunkserver crashes to exercise recovery paths",
-    ],
-  },
-  {
-    name: "CI/CD Automation Pipeline",
-    description:
-      "Containerized CI/CD pipeline using Docker, Kubernetes, and GitHub Actions to automate build, test, and deploy workflows for service repositories.",
-    category: "DevOps",
-    status: "in-progress",
-    featured: true,
-    language: "YAML",
-    tags: ["Docker", "Kubernetes", "GitHub Actions"],
-    githubUrl: "https://github.com/Yakshith15",
-    demoUrl: "https://example.com/cicd-demo",
-    designUrl: "https://example.com/cicd-design",
-    longDescription:
-      "An opinionated CI/CD template for service repos: GitHub Actions workflows build multi-arch Docker images, run unit + integration tests inside ephemeral containers, push to a registry, and roll out to a Kubernetes cluster via Helm. Aimed at replacing per-project bespoke pipelines with a single reusable workflow.",
-    highlights: [
-      "Reusable workflow consumed via `uses:` from any repo",
-      "Matrix-built multi-arch images (amd64, arm64)",
-      "Integration tests spun up via Docker Compose in-runner",
-      "Helm-based deploy with blue/green rollout",
-    ],
-  },
-  {
-    name: "URL Shortener — System Design",
-    description:
-      "Scalable URL shortener exploring system design tradeoffs around caching, sharding, and rate limiting with Redis and PostgreSQL.",
-    category: "System Design",
-    status: "in-progress",
-    featured: true,
-    language: "Go",
-    tags: ["Redis", "PostgreSQL", "Caching", "Rate Limiting"],
-    githubUrl: "https://github.com/Yakshith15",
-    demoUrl: "https://example.com/url-shortener-demo",
-    designUrl: "https://example.com/url-shortener-design",
-    longDescription:
-      "A URL shortener built as a playground for system design tradeoffs. PostgreSQL stores the canonical short→long mapping (sharded by hash prefix), Redis fronts hot keys for sub-ms reads, and a token-bucket rate limiter guards against abuse. Measurable goal: p99 redirect latency under 10ms at 10k RPS on a modest box.",
-    highlights: [
-      "Base62-encoded short IDs derived from Snowflake-style sequence",
-      "Read-through Redis cache with TTL jitter to avoid stampedes",
-      "Hash-prefix sharding across Postgres shards",
-      "Per-IP and per-key token-bucket rate limiting",
     ],
   },
 ];
