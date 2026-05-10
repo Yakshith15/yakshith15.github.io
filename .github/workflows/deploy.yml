@@ -31,7 +31,7 @@ jobs:
       - name: Update vault submodule to latest
         run: |
           if [ -f .gitmodules ] && git config --file .gitmodules --get-regexp path | grep -q 'content/vault'; then
-            git submodule update --remote --merge content/vault
+            git submodule update --remote content/vault
           else
             echo "No vault submodule configured — skipping"
           fi
