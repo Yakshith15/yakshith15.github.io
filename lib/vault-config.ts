@@ -1,5 +1,5 @@
 export const vaultConfig = {
-  includeFolders: [] as string[],
+  includeFolders: ["Papers", "Books"] as string[],
   excludePatterns: [
     "private/**",
     "drafts/**",
