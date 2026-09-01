@@ -88,18 +88,18 @@ export const projects: Project[] = [
   {
     name: "MIT 6.824 Distributed Systems Labs",
     description:
-      "Implemented MapReduce and Raft from the ground up in Go, validated against the course test suite.",
+      "Implemented MapReduce and a linearizable key/value server from the ground up in Go, validated against the course test suite.",
     category: "Distributed Systems",
     status: "completed",
     featured: false,
     language: "Go",
-    tags: ["Raft", "MapReduce", "Consensus", "Replication"],
+    tags: ["MapReduce", "Key/Value Store", "RPC", "Fault Tolerance"],
     longDescription:
-      "Labs 1 and 2 of MIT 6.824. Lab 1 builds a MapReduce coordinator and worker pool that reassigns tasks when a worker dies mid-job. Lab 2 builds Raft directly from the paper: leader election, log replication, state that survives restarts, and log compaction through snapshots. The code stays private, since the course asks students not to publish solutions.",
+      "Labs 1 and 2 of MIT 6.824. Lab 1 builds a MapReduce coordinator and worker pool that reassigns tasks when a worker dies mid-job. Lab 2 builds a key/value server that stays linearizable while clients retry over an unreliable network, which means detecting duplicate requests and applying each operation at most once. The code stays private, since the course asks students not to publish solutions.",
     highlights: [
       "MapReduce coordinator with task reassignment on worker failure",
-      "Raft leader election and log replication under partition and message loss",
-      "Persistent state across crashes, plus log compaction via snapshots",
+      "Linearizable key/value server backed by Go RPC",
+      "At-most-once semantics: duplicate client retries detected and never reapplied",
       "Validated against the full course test suite, including the unreliable-network cases",
     ],
   },
