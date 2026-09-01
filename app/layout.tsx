@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Script from "next/script";
 import { Inter, JetBrains_Mono, Newsreader } from "next/font/google";
-import Header from "@/components/layout/Header";
+import Rail from "@/components/layout/Rail";
 import Footer from "@/components/layout/Footer";
 import { siteConfig } from "@/lib/site-config";
 import "./globals.css";
@@ -76,10 +76,10 @@ export default function RootLayout({
         </Script>
       </head>
       <body className={`${inter.variable} ${newsreader.variable} ${jetbrainsMono.variable}`}>
-        <Header />
-        <main className="main-content">
-          <div className="container">{children}</div>
-        </main>
+        <div className="shell">
+          <Rail />
+          <main className="content">{children}</main>
+        </div>
         <Footer />
       </body>
     </html>

@@ -18,7 +18,6 @@ export const navigation: Array<{ name: string; url: string; newTab?: boolean }> 
 ];
 
 export const introParagraphs = [
-  "Software engineer based in Hyderabad, India.",
   "I care about how large systems hold together: storage, consistency, and the failure cases nobody plans for. I tend to learn things by building them from scratch and writing down what surprised me.",
 ];
 
@@ -145,7 +144,6 @@ export const companies = [
         current: true,
         context:
           "API Marketplace Platform. Teams publish APIs as Envoy-fronted proxies, other teams subscribe under quota. My team owns the system of record, its analytics, and search.",
-        metrics: ["~4,000 APIs", "~40,000 proxies", "~100,000 subscriptions"],
         points: [
           "Built catalog search across ~4,000 production APIs, combining lexical (BM25) and semantic vector retrieval behind a per-query router. Relevance rose ~40% over the lexical-only baseline.",
           "Built the pipeline that joins design-time data (API metadata, versions, proxies, subscriptions) with runtime telemetry from Envoy logs, attributing every request to an API, version, and subscriber. The platform’s analytics dashboards run on it.",

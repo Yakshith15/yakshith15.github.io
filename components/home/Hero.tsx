@@ -1,8 +1,7 @@
 "use client";
 
-import Image from "next/image";
 import { motion } from "framer-motion";
-import { contactLinks, introParagraphs, siteConfig } from "@/lib/site-config";
+import { introParagraphs } from "@/lib/site-config";
 
 function parseLinks(text: string): React.ReactNode[] {
   const parts: React.ReactNode[] = [];
@@ -45,38 +44,11 @@ export default function Hero() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <div className="hero-content">
-        <div className="hero-text">
-          <h1 className="hero-name">{siteConfig.author}</h1>
-          {introParagraphs.map((paragraph, index) => (
-            <p key={index} className="intro-paragraph">
-              {parseLinks(paragraph)}
-            </p>
-          ))}
-
-          <div className="contact-info">
-            {contactLinks.map((contact) => (
-              <span key={contact.text} className="contact-item">
-                <Image
-                  src={contact.icon}
-                  alt={contact.text}
-                  width={16}
-                  height={16}
-                  className="contact-icon"
-                />
-                <a
-                  href={contact.url}
-                  {...(contact.newTab || !contact.url.startsWith("mailto:")
-                    ? { target: "_blank", rel: "noopener noreferrer" }
-                    : {})}
-                >
-                  {contact.text}
-                </a>
-              </span>
-            ))}
-          </div>
-        </div>
-      </div>
+      {introParagraphs.map((paragraph, index) => (
+        <p key={index} className="lede">
+          {parseLinks(paragraph)}
+        </p>
+      ))}
     </motion.section>
   );
 }
