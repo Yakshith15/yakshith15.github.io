@@ -538,6 +538,17 @@ body {
   border-color: #b45309;
 }
 
+.status-completed {
+  color: #16a34a;
+  border-color: #16a34a;
+  background: transparent;
+}
+
+[data-theme="light"] .status-completed {
+  color: #15803d;
+  border-color: #15803d;
+}
+
 .status-archived {
   color: var(--text-tertiary);
   border-color: var(--border-primary);

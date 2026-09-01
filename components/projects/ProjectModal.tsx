@@ -17,6 +17,7 @@ const LANGUAGE_COLORS: Record<string, string> = {
 const STATUS_LABELS: Record<Project["status"], string> = {
   featured: "Featured",
   "in-progress": "In Progress",
+  completed: "Completed",
   archived: "Archived",
 };
 

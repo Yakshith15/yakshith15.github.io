@@ -54,7 +54,7 @@ export type ProjectCategory =
   | "System Design"
   | "Web";
 
-export type ProjectStatus = "featured" | "in-progress" | "archived";
+export type ProjectStatus = "featured" | "in-progress" | "completed" | "archived";
 
 export type Project = {
   name: string;
@@ -86,6 +86,24 @@ export type ProjectCategoryFilter = (typeof projectCategories)[number];
 // correctness benchmark) defensible in an interview. Add `demoUrl` / `designUrl`
 // only when the link actually resolves.
 export const projects: Project[] = [
+  {
+    name: "MIT 6.824 Distributed Systems Labs",
+    description:
+      "Implemented MapReduce and Raft from the ground up in Go, validated against the course test suite.",
+    category: "Distributed Systems",
+    status: "completed",
+    featured: false,
+    language: "Go",
+    tags: ["Raft", "MapReduce", "Consensus", "Replication"],
+    longDescription:
+      "Labs 1 and 2 of MIT 6.824. Lab 1 builds a MapReduce coordinator and worker pool that reassigns tasks when a worker dies mid-job. Lab 2 builds Raft directly from the paper: leader election, log replication, state that survives restarts, and log compaction through snapshots. The code stays private, since the course asks students not to publish solutions.",
+    highlights: [
+      "MapReduce coordinator with task reassignment on worker failure",
+      "Raft leader election and log replication under partition and message loss",
+      "Persistent state across crashes, plus log compaction via snapshots",
+      "Validated against the full course test suite, including the unreliable-network cases",
+    ],
+  },
   {
     name: "Google File System (GFS)",
     description:
