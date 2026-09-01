@@ -18,8 +18,8 @@ export const navigation: Array<{ name: string; url: string; newTab?: boolean }> 
 ];
 
 export const introParagraphs = [
-  "I'm Yakshith, a Software Engineer at JPMorgan Chase. I work on the control plane of an internal API marketplace — the design-time record of every API on it, the analytics built on that, and search.",
-  "I build distributed systems from scratch to understand them — GFS today, Raft and a small SQL engine next — and write up the tradeoffs I run into along the way.",
+  "I'm Yakshith, a software engineer based in Hyderabad, India.",
+  "I care about how large systems hold together: storage, consistency, and the failure cases nobody plans for. I tend to learn things by building them from scratch and writing down what surprised me.",
 ];
 
 export const contactLinks = [
