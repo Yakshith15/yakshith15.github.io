@@ -1,6 +1,3 @@
-"use client";
-
-import { motion } from "framer-motion";
 import { introParagraphs } from "@/lib/site-config";
 
 function parseLinks(text: string): React.ReactNode[] {
@@ -38,17 +35,12 @@ function parseLinks(text: string): React.ReactNode[] {
 
 export default function Hero() {
   return (
-    <motion.section
-      className="hero"
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-    >
+    <section className="hero">
       {introParagraphs.map((paragraph, index) => (
         <p key={index} className="lede">
           {parseLinks(paragraph)}
         </p>
       ))}
-    </motion.section>
+    </section>
   );
 }
