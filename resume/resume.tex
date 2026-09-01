@@ -69,21 +69,17 @@
 
 \org{JPMorgan Chase}{Jul 2025 -- Present}
 \role{Software Engineer I}{Hyderabad, India}
-{\small\itshape API Marketplace Platform: the internal marketplace where teams across the bank publish their APIs as Envoy-fronted proxies and other teams subscribe to them under quota. It carries roughly 4,000 APIs, 40,000 proxies, and 100,000 subscriptions in production. My team owns the system of record for every API on it, the analytics built on that, and search.\par}
+{\small\itshape API Marketplace Platform. Teams publish APIs as Envoy-fronted proxies and other teams subscribe under quota, across \textasciitilde4{,}000 APIs, \textasciitilde40{,}000 proxies, and \textasciitilde100{,}000 subscriptions. My team owns the system of record for every API, its analytics, and search.\par}
 \vspace{0.3em}
 \begin{itemize}
   \item Built catalog search across \textasciitilde4{,}000 production APIs, combining lexical
-        (BM25) and semantic vector retrieval behind a query router that picks the right
-        strategy per query. Relevance rose \textasciitilde40\% over the lexical-only baseline,
-        so teams can find the API they need instead of asking around for it.
-  \item Built the pipeline publishing design-time data (API metadata, versions, proxy
-        definitions, subscriptions) into the datalake and joining it against runtime
-        telemetry from Envoy access logs. The join is what attributes traffic to a specific
-        API, version, and subscriber across \textasciitilde100{,}000 subscriptions, and the platform's analytics and leadership dashboards
-        run on it.
-  \item Integrated gRPC into the Go rate-limiting service that enforces per-subscription
-        quotas, replacing its REST interface. That cut p99 latency \textasciitilde60\% and roughly
-        doubled throughput under peak load.
+        (BM25) and semantic vector retrieval behind a per-query router. Relevance rose
+        \textasciitilde40\% over the lexical-only baseline.
+  \item Built the pipeline joining design-time data (API metadata, versions, proxies,
+        subscriptions) with runtime telemetry from Envoy logs, attributing every request to
+        an API, version, and subscriber. The platform's analytics dashboards run on it.
+  \item Integrated gRPC into the Go service that enforces per-subscription quotas, replacing
+        its REST interface: p99 latency down \textasciitilde60\%, throughput roughly doubled.
   \item Work across the platform stack: portal frontend, backend services, and the
         infrastructure they run on.
 \end{itemize}
@@ -91,9 +87,8 @@
 \vspace{0.5em}
 \role{Software Engineer Intern}{Jan 2025 -- Jul 2025}
 \begin{itemize}
-  \item Migrated critical secrets from Kubernetes Secrets, which are only base64-encoded and
-        readable by anyone with cluster access, to AWS Secrets Manager for encryption at
-        rest, IAM-scoped access, and audit logging.
+  \item Migrated critical secrets from Kubernetes Secrets, which are only base64-encoded, to
+        AWS Secrets Manager for encryption at rest, IAM-scoped access, and audit logging.
   \item Built frontend features for the marketplace portal, the surface teams use to publish
         APIs and manage subscriptions.
 \end{itemize}
@@ -103,9 +98,8 @@
 
 \role{Google File System, built from scratch}{Go}
 \begin{itemize}
-  \item Reimplementing the GFS paper end to end: a master coordinating chunk
-        metadata and leases, chunkservers storing 64\,MB chunks at a configurable
-        replication factor, and a client library handling chunk lookup and
+  \item Reimplementing the GFS paper end to end: a master coordinating chunk metadata and
+        leases, chunkservers storing 64\,MB chunks, and a client library handling lookup and
         streaming reads and writes.
   \item Exercises recovery paths through simulated chunkserver crashes, and uses
         lease-based primary writes to hold the paper's consistency guarantees.
@@ -116,9 +110,8 @@
 \vspace{0.5em}
 \role{MIT 6.824 Distributed Systems Labs}{Go}
 \begin{itemize}
-  \item Implemented MapReduce (coordinator and worker pool with task reassignment on worker
-        failure) and Raft from the paper: leader election, log replication under partition and
-        message loss, persistence across restarts, and log compaction via snapshots.
+  \item Implemented MapReduce with task reassignment on worker failure, and Raft from the
+        paper: leader election, log replication under partition, persistence, and snapshots.
 \end{itemize}
 
 % ------------------------- EDUCATION ------------------------

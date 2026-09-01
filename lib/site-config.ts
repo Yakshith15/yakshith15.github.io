@@ -107,7 +107,7 @@ export const projects: Project[] = [
   {
     name: "Google File System (GFS)",
     description:
-      "End-to-end implementation of the Google File System paper: a master, chunkservers, and a client built from scratch to explore chunk-based storage, replication, and fault tolerance.",
+      "The Google File System paper implemented end to end: master, chunkservers, and client, built from scratch to explore replication and fault tolerance.",
     category: "Distributed Systems",
     status: "in-progress",
     featured: true,
@@ -144,11 +144,12 @@ export const companies = [
         duration: "Jul 2025 – Present",
         current: true,
         context:
-          "API Marketplace Platform: the internal marketplace where teams across the bank publish their APIs as Envoy-fronted proxies and other teams subscribe to them under quota. It carries roughly 4,000 APIs, 40,000 proxies, and 100,000 subscriptions in production. My team owns the system of record for every API on it, the analytics built on that, and search.",
+          "API Marketplace Platform. Teams publish APIs as Envoy-fronted proxies, other teams subscribe under quota. My team owns the system of record, its analytics, and search.",
+        metrics: ["~4,000 APIs", "~40,000 proxies", "~100,000 subscriptions"],
         points: [
-          "Built catalog search across ~4,000 production APIs, combining lexical (BM25) and semantic vector retrieval behind a query router that picks the right strategy per query. Relevance rose ~40% over the lexical-only baseline, so teams can find the API they need instead of asking around for it.",
-          "Built the pipeline that publishes design-time data (API metadata, versions, proxy definitions, subscriptions) into the datalake and joins it against runtime telemetry from Envoy access logs. Raw traffic logs only say a request happened; the join is what attributes it to an API, version, and subscriber across ~100,000 subscriptions, and it’s what the platform’s analytics and leadership dashboards run on.",
-          "Integrated gRPC into the Go rate-limiting service that enforces per-subscription quotas, replacing its REST interface. That cut p99 latency by ~60% and roughly doubled throughput under peak load.",
+          "Built catalog search across ~4,000 production APIs, combining lexical (BM25) and semantic vector retrieval behind a per-query router. Relevance rose ~40% over the lexical-only baseline.",
+          "Built the pipeline that joins design-time data (API metadata, versions, proxies, subscriptions) with runtime telemetry from Envoy logs, attributing every request to an API, version, and subscriber. The platform’s analytics dashboards run on it.",
+          "Integrated gRPC into the Go service that enforces per-subscription quotas, replacing its REST interface: p99 latency down ~60%, throughput roughly doubled.",
           "Work across the platform stack: portal frontend, backend services, and the infrastructure they run on.",
         ],
       },
@@ -158,7 +159,7 @@ export const companies = [
         current: false,
         context: "Joined the same platform, working on the developer-facing portal.",
         points: [
-          "Migrated critical secrets from Kubernetes Secrets, which are base64-encoded and effectively readable by anyone with cluster access, to AWS Secrets Manager for encryption at rest, IAM-scoped access, and audit logging.",
+          "Migrated critical secrets from Kubernetes Secrets, which are only base64-encoded, to AWS Secrets Manager for encryption at rest, IAM-scoped access, and audit logging.",
           "Built frontend features for the portal, the surface teams use to publish APIs and manage subscriptions.",
         ],
       },

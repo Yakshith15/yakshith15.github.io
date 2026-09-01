@@ -35,6 +35,15 @@ export default function Experience() {
                 {position.context && (
                   <p className="position-context">{position.context}</p>
                 )}
+                {"metrics" in position && position.metrics && (
+                  <div className="position-metrics">
+                    {position.metrics.map((metric) => (
+                      <span key={metric} className="metric-chip">
+                        {metric}
+                      </span>
+                    ))}
+                  </div>
+                )}
                 {position.points && (
                   <ul className="position-points">
                     {position.points.map((point, pointIndex) => (
