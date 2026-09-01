@@ -39,6 +39,28 @@ export const metadata: Metadata = {
       "application/rss+xml": "/rss.xml",
     },
   },
+  openGraph: {
+    type: "website",
+    url: siteConfig.baseUrl,
+    siteName: siteConfig.title,
+    title: siteConfig.title,
+    description: siteConfig.description,
+    locale: "en_US",
+    images: [
+      {
+        url: "/og.png",
+        width: 1200,
+        height: 630,
+        alt: siteConfig.author,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteConfig.title,
+    description: siteConfig.description,
+    images: ["/og.png"],
+  },
 };
 
 export default function RootLayout({

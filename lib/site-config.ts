@@ -1,6 +1,6 @@
 export const siteConfig = {
   title: "Yakshith Daggupati",
-  description: "Personal website and blog of Yakshith Daggupati, Software Engineer",
+  description: "Software engineer in Hyderabad, working on API platform infrastructure. Notes on storage, consistency, and the failure cases nobody plans for.",
   baseUrl: "https://yakshith15.github.io",
   author: "Yakshith Daggupati",
   currentLocation: "Hyderabad, India",
