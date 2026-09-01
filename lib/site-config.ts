@@ -18,8 +18,8 @@ export const navigation: Array<{ name: string; url: string; newTab?: boolean }> 
 ];
 
 export const introParagraphs = [
-  "I'm Yakshith Daggupati, a Software Engineer I at JPMorgan Chase.",
-  "I'm interested in distributed systems, DevOps, system design, and databases — exploring how reliable, scalable software is built from the ground up.",
+  "I'm Yakshith, a Software Engineer at JPMorgan Chase working on backend and infrastructure.",
+  "I build distributed systems from scratch to understand them — GFS today, Raft and a small SQL engine next — and write up the tradeoffs I run into along the way.",
 ];
 
 export const contactLinks = [
