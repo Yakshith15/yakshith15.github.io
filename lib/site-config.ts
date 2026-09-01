@@ -127,10 +127,10 @@ export const companies = [
         duration: "Jul 2025 – Present",
         current: true,
         context:
-          "API Marketplace Platform — an internal marketplace where teams publish APIs as Envoy-fronted proxies and consumer teams subscribe to them under quota. My team owns the control plane: the design-time record of every API on the platform, the analytics built on it, and search.",
+          "API Marketplace Platform — an internal marketplace where teams publish APIs as Envoy-fronted proxies and consumer teams subscribe to them under quota: ~4,000 APIs, ~40,000 proxies, and ~100,000 subscriptions in production. My team owns the control plane: the design-time record of every API on the platform, the analytics built on it, and search.",
         points: [
-          "Built catalog search over the platform’s design-time metadata, combining lexical (BM25) and semantic vector retrieval behind a query router that picks the right strategy per query — lifted relevance by ~40% over the lexical-only baseline, so teams can find the API they need instead of asking around for it.",
-          "Built the pipeline that publishes design-time data — API metadata, versions, proxy definitions, subscriptions — into the datalake and joins it against runtime telemetry from Envoy access logs. Raw traffic logs only say a request happened; the join is what attributes it to an API, version, and subscriber, and it’s what the platform’s analytics and leadership dashboards run on.",
+          "Built catalog search across ~4,000 production APIs, combining lexical (BM25) and semantic vector retrieval behind a query router that picks the right strategy per query — lifted relevance by ~40% over the lexical-only baseline, so teams can find the API they need instead of asking around for it.",
+          "Built the pipeline that publishes design-time data — API metadata, versions, proxy definitions, subscriptions — into the datalake and joins it against runtime telemetry from Envoy access logs. Raw traffic logs only say a request happened; the join is what attributes it to an API, version, and subscriber across ~100,000 subscriptions, and it’s what the platform’s analytics and leadership dashboards run on.",
           "Integrated gRPC into the Go rate-limiting service that enforces per-subscription quotas, replacing its REST interface — cut p99 latency by ~60% and roughly doubled throughput under peak load.",
           "Work across the stack on the control plane — portal frontend, backend services, and the infrastructure they run on.",
         ],

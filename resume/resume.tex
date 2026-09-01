@@ -70,19 +70,20 @@
 \org{JPMorgan Chase}{Jul 2025 -- Present}
 \role{Software Engineer I}{Hyderabad, India}
 {\small\itshape API Marketplace Platform --- an internal marketplace where teams publish
-APIs as Envoy-fronted proxies and consumer teams subscribe to them under quota. My team
+APIs as Envoy-fronted proxies and consumer teams subscribe to them under quota:
+\textasciitilde4{,}000 APIs, \textasciitilde40{,}000 proxies, and \textasciitilde100{,}000 subscriptions in production. My team
 owns the control plane: the design-time record of every API on the platform, the analytics
 built on it, and search.\par}
 \vspace{0.3em}
 \begin{itemize}
-  \item Built catalog search over the platform's design-time metadata, combining lexical
+  \item Built catalog search across \textasciitilde4{,}000 production APIs, combining lexical
         (BM25) and semantic vector retrieval behind a query router that picks the right
         strategy per query --- raising relevance \textasciitilde40\% over the lexical-only
         baseline so teams can find the API they need instead of asking around for it.
   \item Built the pipeline publishing design-time data --- API metadata, versions, proxy
         definitions, subscriptions --- into the datalake and joining it against runtime
         telemetry from Envoy access logs. The join is what attributes traffic to a specific
-        API, version, and subscriber, and the platform's analytics and leadership dashboards
+        API, version, and subscriber across \textasciitilde100{,}000 subscriptions, and the platform's analytics and leadership dashboards
         run on it.
   \item Integrated gRPC into the Go rate-limiting service that enforces per-subscription
         quotas, replacing its REST interface --- cutting p99 latency \textasciitilde60\% and
