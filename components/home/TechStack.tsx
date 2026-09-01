@@ -12,6 +12,7 @@ export default function TechStack() {
       viewport={{ once: true }}
       transition={{ duration: 0.5 }}
     >
+      <h3>Stack</h3>
       <div className="tech-categories">
         <div className="tech-group">
           <span className="tech-label">Languages: </span>

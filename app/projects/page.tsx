@@ -13,7 +13,7 @@ export default function ProjectsPage() {
     <div className="projects-page">
       <h1>Projects</h1>
       <p>
-        A collection of things I&apos;ve built or am currently building —
+        A collection of things I&apos;ve built or am currently building,
         spanning distributed systems, DevOps, and system design.
       </p>
 
