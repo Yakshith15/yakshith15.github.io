@@ -74,17 +74,17 @@
 \begin{itemize}
   \item Built catalog search across \textasciitilde4{,}000 production APIs, combining lexical
         (BM25) and semantic vector retrieval behind a query router that picks the right
-        strategy per query --- raising relevance \textasciitilde40\% over the lexical-only
-        baseline so teams can find the API they need instead of asking around for it.
-  \item Built the pipeline publishing design-time data --- API metadata, versions, proxy
-        definitions, subscriptions --- into the datalake and joining it against runtime
+        strategy per query. Relevance rose \textasciitilde40\% over the lexical-only baseline,
+        so teams can find the API they need instead of asking around for it.
+  \item Built the pipeline publishing design-time data (API metadata, versions, proxy
+        definitions, subscriptions) into the datalake and joining it against runtime
         telemetry from Envoy access logs. The join is what attributes traffic to a specific
         API, version, and subscriber across \textasciitilde100{,}000 subscriptions, and the platform's analytics and leadership dashboards
         run on it.
   \item Integrated gRPC into the Go rate-limiting service that enforces per-subscription
-        quotas, replacing its REST interface --- cutting p99 latency \textasciitilde60\% and
-        roughly doubling throughput under peak load.
-  \item Work across the control plane stack: portal frontend, backend services, and the
+        quotas, replacing its REST interface. That cut p99 latency \textasciitilde60\% and roughly
+        doubled throughput under peak load.
+  \item Work across the platform stack: portal frontend, backend services, and the
         infrastructure they run on.
 \end{itemize}
 
@@ -101,7 +101,7 @@
 % ------------------------- PROJECTS -------------------------
 \section{Projects}
 
-\role{Google File System --- from-scratch implementation}{Go}
+\role{Google File System, built from scratch}{Go}
 \begin{itemize}
   \item Reimplementing the GFS paper end to end: a master coordinating chunk
         metadata and leases, chunkservers storing 64\,MB chunks at a configurable

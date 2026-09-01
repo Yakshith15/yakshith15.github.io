@@ -14,7 +14,7 @@ export const navigation: Array<{ name: string; url: string; newTab?: boolean }> 
   { name: "Home", url: "/" },
   { name: "Projects", url: "/projects/" },
   { name: "Blog", url: "/blog/" },
-  { name: "Resume", url: "/resume/" },
+  { name: "Resume", url: "/resume.pdf", newTab: true },
 ];
 
 export const introParagraphs = [
@@ -107,7 +107,7 @@ export const projects: Project[] = [
   {
     name: "Google File System (GFS)",
     description:
-      "End-to-end implementation of the Google File System paper — master, chunkservers, and client built from scratch to explore chunk-based storage, replication, and fault tolerance.",
+      "End-to-end implementation of the Google File System paper: a master, chunkservers, and a client built from scratch to explore chunk-based storage, replication, and fault tolerance.",
     category: "Distributed Systems",
     status: "in-progress",
     featured: true,
@@ -146,10 +146,10 @@ export const companies = [
         context:
           "API Marketplace Platform: the internal marketplace where teams across the bank publish their APIs as Envoy-fronted proxies and other teams subscribe to them under quota. It carries roughly 4,000 APIs, 40,000 proxies, and 100,000 subscriptions in production. My team owns the system of record for every API on it, the analytics built on that, and search.",
         points: [
-          "Built catalog search across ~4,000 production APIs, combining lexical (BM25) and semantic vector retrieval behind a query router that picks the right strategy per query — lifted relevance by ~40% over the lexical-only baseline, so teams can find the API they need instead of asking around for it.",
-          "Built the pipeline that publishes design-time data — API metadata, versions, proxy definitions, subscriptions — into the datalake and joins it against runtime telemetry from Envoy access logs. Raw traffic logs only say a request happened; the join is what attributes it to an API, version, and subscriber across ~100,000 subscriptions, and it’s what the platform’s analytics and leadership dashboards run on.",
-          "Integrated gRPC into the Go rate-limiting service that enforces per-subscription quotas, replacing its REST interface — cut p99 latency by ~60% and roughly doubled throughput under peak load.",
-          "Work across the stack on the control plane — portal frontend, backend services, and the infrastructure they run on.",
+          "Built catalog search across ~4,000 production APIs, combining lexical (BM25) and semantic vector retrieval behind a query router that picks the right strategy per query. Relevance rose ~40% over the lexical-only baseline, so teams can find the API they need instead of asking around for it.",
+          "Built the pipeline that publishes design-time data (API metadata, versions, proxy definitions, subscriptions) into the datalake and joins it against runtime telemetry from Envoy access logs. Raw traffic logs only say a request happened; the join is what attributes it to an API, version, and subscriber across ~100,000 subscriptions, and it’s what the platform’s analytics and leadership dashboards run on.",
+          "Integrated gRPC into the Go rate-limiting service that enforces per-subscription quotas, replacing its REST interface. That cut p99 latency by ~60% and roughly doubled throughput under peak load.",
+          "Work across the platform stack: portal frontend, backend services, and the infrastructure they run on.",
         ],
       },
       {
@@ -158,7 +158,7 @@ export const companies = [
         current: false,
         context: "Joined the same platform, working on the developer-facing portal.",
         points: [
-          "Migrated critical secrets from Kubernetes Secrets — base64-encoded and effectively readable by anyone with cluster access — to AWS Secrets Manager for encryption at rest, IAM-scoped access, and audit logging.",
+          "Migrated critical secrets from Kubernetes Secrets, which are base64-encoded and effectively readable by anyone with cluster access, to AWS Secrets Manager for encryption at rest, IAM-scoped access, and audit logging.",
           "Built frontend features for the portal, the surface teams use to publish APIs and manage subscriptions.",
         ],
       },
