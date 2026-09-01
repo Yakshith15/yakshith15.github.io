@@ -80,6 +80,7 @@ export default function Masthead() {
         width={120}
         height={120}
         className="masthead-photo"
+        draggable={false}
         priority
       />
     </header>
