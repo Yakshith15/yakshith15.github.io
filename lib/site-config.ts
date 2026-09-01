@@ -6,7 +6,7 @@ export const siteConfig = {
   currentLocation: "Hyderabad, India",
   theme: {
     toggleEnabled: true,
-    defaultTheme: "dark" as "light" | "dark",
+    defaultTheme: "light" as "light" | "dark",
   },
 };
 
@@ -18,7 +18,7 @@ export const navigation: Array<{ name: string; url: string; newTab?: boolean }> 
 ];
 
 export const introParagraphs = [
-  "I'm Yakshith, a software engineer based in Hyderabad, India.",
+  "Software engineer based in Hyderabad, India.",
   "I care about how large systems hold together: storage, consistency, and the failure cases nobody plans for. I tend to learn things by building them from scratch and writing down what surprised me.",
 ];
 

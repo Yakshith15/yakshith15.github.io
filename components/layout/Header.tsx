@@ -25,9 +25,9 @@ export default function Header() {
     >
       <div className="container">
         <div className="header-content">
-          <h1 className="site-name">
+          <div className="site-name">
             <Link href="/">{siteConfig.author}</Link>
-          </h1>
+          </div>
           <nav className="main-nav">
             {navigation.map((item) =>
               item.newTab ? (

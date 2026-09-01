@@ -2,7 +2,8 @@
 
 :root {
   /* Typography */
-  --font-sans: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-serif: 'Newsreader', Georgia, 'Times New Roman', serif;
   --font-mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
 
   /* Type scale */
@@ -16,26 +17,26 @@
   --text-4xl: 2.5rem;
   --text-5xl: 3rem;
 
-  /* Colors - Dark mode (default) */
-  --bg-primary: #0a0a0a;
-  --bg-secondary: #111111;
-  --bg-tertiary: #171717;
-  --bg-hover: #1a1a1a;
+  /* Colors - warm paper (default) */
+  --bg-primary: #faf8f3;
+  --bg-secondary: #f4f1e9;
+  --bg-tertiary: #ebe6da;
+  --bg-hover: #e3ddd1;
 
-  --text-primary: #fafafa;
-  --text-secondary: #a1a1a1;
-  --text-tertiary: #666666;
+  --text-primary: #1a1815;
+  --text-secondary: #4a453d;
+  --text-tertiary: #8a8378;
 
-  --border-primary: #262626;
-  --border-secondary: #1f1f1f;
+  --border-primary: #e3ddd1;
+  --border-secondary: #efebe1;
 
-  --accent: #3b82f6;
-  --accent-hover: #60a5fa;
+  --accent: #a3502a;
+  --accent-hover: #8a4222;
 
-  --icon-filter: invert(1);
+  --icon-filter: invert(0);
 
   /* Spacing */
-  --container-width: 720px;
+  --container-width: 760px;
   --section-gap: 32px;
 
   /* Transitions */
@@ -43,24 +44,24 @@
   --transition-base: 200ms ease;
 }
 
-/* Light mode */
-[data-theme="light"] {
-  --bg-primary: #fafafa;
-  --bg-secondary: #f4f4f5;
-  --bg-tertiary: #e4e4e7;
-  --bg-hover: #d4d4d8;
+/* Dark mode */
+[data-theme="dark"] {
+  --bg-primary: #14130f;
+  --bg-secondary: #1c1a15;
+  --bg-tertiary: #23201a;
+  --bg-hover: #2a2620;
 
-  --text-primary: #18181b;
-  --text-secondary: #3f3f46;
-  --text-tertiary: #71717a;
+  --text-primary: #f0ece3;
+  --text-secondary: #b5aea0;
+  --text-tertiary: #7d7669;
 
-  --border-primary: #d4d4d8;
-  --border-secondary: #e4e4e7;
+  --border-primary: #2e2a22;
+  --border-secondary: #241f19;
 
-  --accent: #2563eb;
-  --accent-hover: #1d4ed8;
+  --accent: #d98a5f;
+  --accent-hover: #e9a179;
 
-  --icon-filter: invert(0);
+  --icon-filter: invert(1);
 }
 
 * {
@@ -188,13 +189,14 @@ body {
   flex: 1;
 }
 
-.greeting {
-  font-size: var(--text-sm);
-  color: var(--text-tertiary);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  margin-bottom: 16px;
-  font-weight: 500;
+.hero-name {
+  font-family: var(--font-serif);
+  font-size: clamp(2.5rem, 7vw, 3.75rem);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  margin: 0 0 20px 0;
 }
 
 .intro-paragraph {
@@ -260,22 +262,6 @@ body {
 
 .contact-item a:hover {
   color: var(--text-primary);
-}
-
-.hero-image {
-  flex-shrink: 0;
-}
-
-.profile-photo-container {
-  position: relative;
-}
-
-.profile-photo {
-  width: 160px;
-  height: 160px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 1px solid var(--border-primary);
 }
 
 /* Tech Stack */
@@ -528,25 +514,25 @@ body {
 }
 
 .status-in-progress {
-  color: #d97706;
-  border-color: #d97706;
+  color: #b45309;
+  border-color: #b45309;
   background: transparent;
 }
 
-[data-theme="light"] .status-in-progress {
-  color: #b45309;
-  border-color: #b45309;
+[data-theme="dark"] .status-in-progress {
+  color: #e0a44a;
+  border-color: #e0a44a;
 }
 
 .status-completed {
-  color: #16a34a;
-  border-color: #16a34a;
+  color: #15803d;
+  border-color: #15803d;
   background: transparent;
 }
 
-[data-theme="light"] .status-completed {
-  color: #15803d;
-  border-color: #15803d;
+[data-theme="dark"] .status-completed {
+  color: #6bbf7a;
+  border-color: #6bbf7a;
 }
 
 .status-archived {
@@ -702,7 +688,7 @@ body {
   animation: modal-fade-in 150ms ease-out;
 }
 
-[data-theme="light"] .modal-backdrop {
+[data-theme="dark"] .modal-backdrop {
   background: rgba(0, 0, 0, 0.35);
 }
 
@@ -1711,4 +1697,19 @@ footer {
   border-radius: 4px;
   padding: 2px 8px;
   white-space: nowrap;
+}
+
+
+/* Serif headings */
+h1, h2, h3, h4,
+.site-name,
+.company-title,
+.institution {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.intro-paragraph {
+  max-width: 62ch;
 }

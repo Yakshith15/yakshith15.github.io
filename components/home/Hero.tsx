@@ -47,7 +47,7 @@ export default function Hero() {
     >
       <div className="hero-content">
         <div className="hero-text">
-          <div className="greeting">Hello</div>
+          <h1 className="hero-name">{siteConfig.author}</h1>
           {introParagraphs.map((paragraph, index) => (
             <p key={index} className="intro-paragraph">
               {parseLinks(paragraph)}
@@ -74,18 +74,6 @@ export default function Hero() {
                 </a>
               </span>
             ))}
-          </div>
-        </div>
-        <div className="hero-image">
-          <div className="profile-photo-container">
-            <Image
-              src="/images/profile.jpg"
-              alt={siteConfig.author}
-              width={160}
-              height={160}
-              className="profile-photo"
-              priority
-            />
           </div>
         </div>
       </div>

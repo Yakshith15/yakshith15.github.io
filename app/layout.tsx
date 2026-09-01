@@ -1,16 +1,24 @@
 import type { Metadata } from "next";
 import Script from "next/script";
-import { DM_Sans, JetBrains_Mono } from "next/font/google";
+import { Inter, JetBrains_Mono, Newsreader } from "next/font/google";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { siteConfig } from "@/lib/site-config";
 import "./globals.css";
 
-const dmSans = DM_Sans({
+const inter = Inter({
   subsets: ["latin"],
   variable: "--font-sans",
   display: "swap",
+});
+
+const newsreader = Newsreader({
+  subsets: ["latin"],
+  variable: "--font-serif",
+  display: "swap",
   weight: ["400", "500", "600"],
+  fallback: ["Georgia", "Times New Roman", "serif"],
+  adjustFontFallback: false,
 });
 
 const jetbrainsMono = JetBrains_Mono({
@@ -67,7 +75,7 @@ export default function RootLayout({
           posthog.init('phc_BA7JbimEExlzFzOBD8CxPM7L60JMhacMCxd9f3WPRMN',{api_host:'https://us.i.posthog.com',defaults:'2025-05-24',person_profiles:'identified_only'})`}
         </Script>
       </head>
-      <body className={`${dmSans.variable} ${jetbrainsMono.variable}`}>
+      <body className={`${inter.variable} ${newsreader.variable} ${jetbrainsMono.variable}`}>
         <Header />
         <main className="main-content">
           <div className="container">{children}</div>
