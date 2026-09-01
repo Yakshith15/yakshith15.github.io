@@ -1649,8 +1649,14 @@ h1, h2, h3, h4,
 .masthead-nav {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   gap: 20px;
   margin-top: 22px;
+}
+
+.masthead-nav .theme-toggle {
+  margin-left: 4px;
+  padding: 2px;
 }
 
 .masthead-link {
@@ -1693,17 +1699,10 @@ h1, h2, h3, h4,
   color: var(--text-primary);
 }
 
-.masthead-side {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 14px;
-  flex-shrink: 0;
-}
-
 .masthead-photo {
-  width: 88px;
-  height: 88px;
+  width: 120px;
+  height: 120px;
+  flex-shrink: 0;
   border-radius: 6px;
   object-fit: cover;
   border: 1px solid var(--border-primary);
@@ -1822,8 +1821,4 @@ footer .container {
     align-items: flex-start;
   }
 
-  .masthead-side {
-    flex-direction: row;
-    align-items: center;
-  }
 }

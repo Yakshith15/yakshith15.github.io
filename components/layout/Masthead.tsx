@@ -46,6 +46,7 @@ export default function Masthead() {
               </Link>
             )
           )}
+          <ThemeToggle />
         </nav>
 
         <div className="masthead-contact">
@@ -73,17 +74,14 @@ export default function Masthead() {
         </div>
       </div>
 
-      <div className="masthead-side">
-        <Image
-          src="/images/profile.jpg"
-          alt={siteConfig.author}
-          width={88}
-          height={88}
-          className="masthead-photo"
-          priority
-        />
-        <ThemeToggle />
-      </div>
+      <Image
+        src="/images/profile.jpg"
+        alt={siteConfig.author}
+        width={120}
+        height={120}
+        className="masthead-photo"
+        priority
+      />
     </header>
   );
 }
