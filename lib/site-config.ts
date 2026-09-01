@@ -15,10 +15,11 @@ export const navigation: Array<{ name: string; url: string; newTab?: boolean }> 
   { name: "Projects", url: "/projects/" },
   { name: "Blog", url: "/blog/" },
   { name: "Vault", url: "/vault/" },
+  { name: "Resume", url: "/resume/" },
 ];
 
 export const introParagraphs = [
-  "I'm Yakshith, a Software Engineer at JPMorgan Chase working on backend and infrastructure.",
+  "I'm Yakshith, a Software Engineer at JPMorgan Chase. I work on the control plane of an internal API marketplace — the design-time record of every API on it, the analytics built on that, and search.",
   "I build distributed systems from scratch to understand them — GFS today, Raft and a small SQL engine next — and write up the tradeoffs I run into along the way.",
 ];
 
@@ -125,19 +126,23 @@ export const companies = [
         title: "Software Engineer I",
         duration: "Jul 2025 – Present",
         current: true,
+        context:
+          "API Marketplace Platform — an internal marketplace where teams publish APIs as Envoy-fronted proxies and consumer teams subscribe to them under quota. My team owns the control plane: the design-time record of every API on the platform, the analytics built on it, and search.",
         points: [
-          "Built a hybrid search system combining lexical (BM25) and semantic vector retrieval, with a query router that picks the right strategy per query — lifted result relevance by ~40% over the lexical-only baseline.",
-          "Owned an ETL pipeline feeding a datalake — extracting from multiple upstream sources, transforming into the schema downstream needed, and powering dashboards that gave leadership clear visibility into project health and KPIs.",
-          "Integrated gRPC into a Go-based rate-limiting service, replacing the REST interface — cut p99 latency by ~60% and roughly 2× throughput under peak load.",
+          "Built catalog search over the platform’s design-time metadata, combining lexical (BM25) and semantic vector retrieval behind a query router that picks the right strategy per query — lifted relevance by ~40% over the lexical-only baseline, so teams can find the API they need instead of asking around for it.",
+          "Built the pipeline that publishes design-time data — API metadata, versions, proxy definitions, subscriptions — into the datalake and joins it against runtime telemetry from Envoy access logs. Raw traffic logs only say a request happened; the join is what attributes it to an API, version, and subscriber, and it’s what the platform’s analytics and leadership dashboards run on.",
+          "Integrated gRPC into the Go rate-limiting service that enforces per-subscription quotas, replacing its REST interface — cut p99 latency by ~60% and roughly doubled throughput under peak load.",
+          "Work across the stack on the control plane — portal frontend, backend services, and the infrastructure they run on.",
         ],
       },
       {
         title: "Software Engineer Intern",
         duration: "Jan 2025 – Jul 2025",
         current: false,
+        context: "Joined the same platform, working on the developer-facing portal.",
         points: [
-          "Contributed to an internal tool, API Marketplace Portal, on the frontend.",
-          "Migrated critical secrets from Kubernetes Secrets (base64-encoded, effectively readable by anyone with cluster access) to AWS Secrets Manager for proper encryption at rest, IAM-scoped access, and audit logging.",
+          "Migrated critical secrets from Kubernetes Secrets — base64-encoded and effectively readable by anyone with cluster access — to AWS Secrets Manager for encryption at rest, IAM-scoped access, and audit logging.",
+          "Built frontend features for the portal, the surface teams use to publish APIs and manage subscriptions.",
         ],
       },
     ],

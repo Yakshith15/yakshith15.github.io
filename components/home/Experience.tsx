@@ -32,6 +32,9 @@ export default function Experience() {
                   <span className="role">{position.title}</span>
                   <span className="period">{position.duration}</span>
                 </div>
+                {position.context && (
+                  <p className="position-context">{position.context}</p>
+                )}
                 {position.points && (
                   <ul className="position-points">
                     {position.points.map((point, pointIndex) => (

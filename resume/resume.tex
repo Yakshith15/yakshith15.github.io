@@ -1,0 +1,133 @@
+%==============================================================
+% Yakshith Daggupati — Resume
+%
+% Canonical source for resume.pdf. Single column, no tables,
+% no images, no icon fonts — parses cleanly in ATS screeners.
+%
+% Compile:  tectonic resume.tex        (recommended, one binary)
+%       or  pdflatex resume.tex        (run twice for links)
+%       or  paste into overleaf.com
+%
+% Keep this to ONE page. If it spills, cut the weakest bullet.
+%==============================================================
+\documentclass[letterpaper,10pt]{article}
+
+\usepackage[left=0.6in,right=0.6in,top=0.5in,bottom=0.5in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{charter}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage[hidelinks]{hyperref}
+\usepackage{xcolor}
+
+\pagestyle{empty}
+\raggedright
+\setlength{\parindent}{0pt}
+
+% --- Section headings: small caps, rule underneath -----------
+\titleformat{\section}
+  {\normalsize\bfseries\scshape}
+  {}{0em}{}[\vspace{-0.6em}\rule{\textwidth}{0.6pt}]
+\titlespacing{\section}{0pt}{1.0em}{0.5em}
+
+% --- Bullets -------------------------------------------------
+\setlist[itemize]{
+  leftmargin=1.1em,
+  topsep=0.15em,
+  itemsep=0.15em,
+  parsep=0pt,
+  label=\textbullet
+}
+
+% --- Role line: title on the left, dates flush right ---------
+\newcommand{\role}[2]{%
+  \textbf{#1}\hfill\textit{#2}\par\vspace{0.15em}%
+}
+\newcommand{\org}[2]{%
+  \textbf{#1}\hfill\textbf{#2}\par\vspace{0.1em}%
+}
+
+%==============================================================
+\begin{document}
+
+% ------------------------- HEADER ---------------------------
+\begin{center}
+  {\LARGE\bfseries Yakshith Daggupati}\\[0.45em]
+  % TODO: add your phone number — recruiters still ask for it.
+  Hyderabad, India \textbullet{} %
+  \href{mailto:daggupatiyakshithnaidu@gmail.com}{daggupatiyakshithnaidu@gmail.com}\\[0.25em]
+  \href{https://github.com/Yakshith15}{github.com/Yakshith15} \textbullet{} %
+  \href{https://www.linkedin.com/in/yakshithnaidu/}{linkedin.com/in/yakshithnaidu} \textbullet{} %
+  \href{https://yakshith15.github.io}{yakshith15.github.io}
+\end{center}
+
+\vspace{0.4em}
+
+% ------------------------ EXPERIENCE ------------------------
+\section{Experience}
+
+\org{JPMorgan Chase}{Jul 2025 -- Present}
+\role{Software Engineer I}{Hyderabad, India}
+{\small\itshape API Marketplace Platform --- an internal marketplace where teams publish
+APIs as Envoy-fronted proxies and consumer teams subscribe to them under quota. My team
+owns the control plane: the design-time record of every API on the platform, the analytics
+built on it, and search.\par}
+\vspace{0.3em}
+\begin{itemize}
+  \item Built catalog search over the platform's design-time metadata, combining lexical
+        (BM25) and semantic vector retrieval behind a query router that picks the right
+        strategy per query --- raising relevance \textasciitilde40\% over the lexical-only
+        baseline so teams can find the API they need instead of asking around for it.
+  \item Built the pipeline publishing design-time data --- API metadata, versions, proxy
+        definitions, subscriptions --- into the datalake and joining it against runtime
+        telemetry from Envoy access logs. The join is what attributes traffic to a specific
+        API, version, and subscriber, and the platform's analytics and leadership dashboards
+        run on it.
+  \item Integrated gRPC into the Go rate-limiting service that enforces per-subscription
+        quotas, replacing its REST interface --- cutting p99 latency \textasciitilde60\% and
+        roughly doubling throughput under peak load.
+  \item Work across the control plane stack: portal frontend, backend services, and the
+        infrastructure they run on.
+\end{itemize}
+
+\vspace{0.5em}
+\role{Software Engineer Intern}{Jan 2025 -- Jul 2025}
+\begin{itemize}
+  \item Migrated critical secrets from Kubernetes Secrets, which are only base64-encoded and
+        readable by anyone with cluster access, to AWS Secrets Manager for encryption at
+        rest, IAM-scoped access, and audit logging.
+  \item Built frontend features for the marketplace portal, the surface teams use to publish
+        APIs and manage subscriptions.
+\end{itemize}
+
+% ------------------------- PROJECTS -------------------------
+\section{Projects}
+
+\role{Google File System --- from-scratch implementation}{Go}
+\begin{itemize}
+  \item Reimplementing the GFS paper end to end: a master coordinating chunk
+        metadata and leases, chunkservers storing 64\,MB chunks at a configurable
+        replication factor, and a client library handling chunk lookup and
+        streaming reads and writes.
+  \item Exercises recovery paths through simulated chunkserver crashes, and uses
+        lease-based primary writes to hold the paper's consistency guarantees.
+  % TODO: add the repo link once it is public, e.g.
+  % \href{https://github.com/Yakshith15/gfs}{github.com/Yakshith15/gfs}
+\end{itemize}
+
+% ------------------------- EDUCATION ------------------------
+\section{Education}
+
+\org{Chaitanya Bharathi Institute of Technology}{Dec 2021 -- May 2025}
+B.E., Computer Science Engineering (AI \& ML) \textbullet{} 9.4 / 10 CGPA
+
+% -------------------------- SKILLS --------------------------
+\section{Technical Skills}
+
+\textbf{Languages:} Go, Java, Python, TypeScript, JavaScript, C++\\[0.2em]
+\textbf{Infrastructure:} AWS, Docker, Kubernetes, gRPC, CI/CD\\[0.2em]
+\textbf{Data:} PostgreSQL, Redis, ETL pipelines, vector and lexical search\\[0.2em]
+\textbf{Focus:} Distributed systems, backend services, system design
+
+\end{document}

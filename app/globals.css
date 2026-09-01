@@ -1677,3 +1677,169 @@ footer {
     font-size: 0.8rem !important;
   }
 }
+/* ============================================================
+   Resume page
+   Mirrors resume/resume.tex. Screen styling stays in the site
+   theme; @media print strips it back to a plain black-on-white
+   sheet so Cmd-P produces something sane.
+   ============================================================ */
+
+.resume-actions {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.resume-download {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  padding: 6px 14px;
+  border: 1px solid var(--border-primary);
+  border-radius: 6px;
+  color: var(--text-secondary);
+  transition: all var(--transition-base);
+}
+
+.resume-download:hover {
+  color: var(--text-primary);
+  border-color: var(--accent);
+}
+
+.resume-sheet {
+  margin-top: var(--section-gap);
+}
+
+.resume-header {
+  text-align: center;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border-primary);
+}
+
+.resume-header h2 {
+  font-size: var(--text-3xl);
+  margin-bottom: 8px;
+}
+
+.resume-contact {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  margin: 2px 0;
+}
+
+.resume-section {
+  margin-top: 28px;
+}
+
+.resume-section h3 {
+  font-size: var(--text-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-secondary);
+  padding-bottom: 6px;
+  margin-bottom: 14px;
+  border-bottom: 1px solid var(--border-secondary);
+}
+
+.resume-role {
+  margin-bottom: 18px;
+}
+
+.resume-line {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.resume-org {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.resume-title {
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.resume-dates {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--text-tertiary);
+  white-space: nowrap;
+}
+
+.resume-role ul {
+  margin: 8px 0 0;
+  padding-left: 1.1em;
+}
+
+.resume-role li {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  margin-bottom: 5px;
+  line-height: 1.6;
+}
+
+.resume-detail {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  margin: 4px 0;
+}
+
+@media print {
+  .site-header,
+  footer,
+  .theme-toggle,
+  .resume-actions {
+    display: none !important;
+  }
+
+  html,
+  body {
+    background: #fff !important;
+    color: #000 !important;
+  }
+
+  .resume-page,
+  .resume-sheet {
+    margin: 0;
+    padding: 0;
+    max-width: none;
+  }
+
+  .resume-section {
+    margin-top: 16px;
+    page-break-inside: avoid;
+  }
+
+  .resume-role {
+    page-break-inside: avoid;
+  }
+
+  .resume-header h2,
+  .resume-org,
+  .resume-title,
+  .resume-section h3,
+  .resume-contact,
+  .resume-detail,
+  .resume-dates,
+  .resume-role li,
+  .resume-page a {
+    color: #000 !important;
+  }
+
+  .resume-page a {
+    text-decoration: none;
+  }
+}
+
+.position-context,
+.resume-context {
+  font-size: var(--text-sm);
+  color: var(--text-tertiary);
+  font-style: italic;
+  margin: 6px 0 0;
+  line-height: 1.6;
+}
