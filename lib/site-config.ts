@@ -127,7 +127,7 @@ export const companies = [
         duration: "Jul 2025 – Present",
         current: true,
         context:
-          "API Marketplace Platform — an internal marketplace where teams publish APIs as Envoy-fronted proxies and consumer teams subscribe to them under quota: ~4,000 APIs, ~40,000 proxies, and ~100,000 subscriptions in production. My team owns the control plane: the design-time record of every API on the platform, the analytics built on it, and search.",
+          "API Marketplace Platform — the internal marketplace where teams across the bank publish their APIs as Envoy-fronted proxies and other teams subscribe to them under quota: ~4,000 APIs, ~40,000 proxies, and ~100,000 subscriptions in production. My team owns the control plane — the system of record for every API on it, the analytics built on that, and search.",
         points: [
           "Built catalog search across ~4,000 production APIs, combining lexical (BM25) and semantic vector retrieval behind a query router that picks the right strategy per query — lifted relevance by ~40% over the lexical-only baseline, so teams can find the API they need instead of asking around for it.",
           "Built the pipeline that publishes design-time data — API metadata, versions, proxy definitions, subscriptions — into the datalake and joins it against runtime telemetry from Envoy access logs. Raw traffic logs only say a request happened; the join is what attributes it to an API, version, and subscriber across ~100,000 subscriptions, and it’s what the platform’s analytics and leadership dashboards run on.",
