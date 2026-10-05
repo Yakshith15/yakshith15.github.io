@@ -3,6 +3,7 @@ import TechStack from "@/components/home/TechStack";
 import Experience from "@/components/home/Experience";
 import Projects from "@/components/home/Projects";
 import Education from "@/components/home/Education";
+import Certifications from "@/components/home/Certifications";
 
 export default function Home() {
   return (
@@ -12,6 +13,7 @@ export default function Home() {
       <Experience />
       <Projects />
       <Education />
+      <Certifications />
     </div>
   );
 }

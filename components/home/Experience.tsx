@@ -42,6 +42,16 @@ export default function Experience() {
                     ))}
                   </ul>
                 )}
+                {position.groups?.map((group) => (
+                  <div key={group.label} className="position-group">
+                    <h5 className="position-group-label">{group.label}</h5>
+                    <ul className="position-points">
+                      {group.points.map((point, pointIndex) => (
+                        <li key={pointIndex}>{point}</li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
               </div>
             ))}
           </div>
