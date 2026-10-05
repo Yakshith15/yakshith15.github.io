@@ -46,17 +46,17 @@
 
 /* Dark mode */
 [data-theme="dark"] {
-  --bg-primary: #101512;
-  --bg-secondary: #171d19;
-  --bg-tertiary: #1d241f;
-  --bg-hover: #232b26;
+  --bg-primary: #0a0a0a;
+  --bg-secondary: #121212;
+  --bg-tertiary: #1a1a1a;
+  --bg-hover: #222222;
 
-  --text-primary: #eaefe9;
-  --text-secondary: #adb5ab;
-  --text-tertiary: #8a9188;
+  --text-primary: #ededed;
+  --text-secondary: #b0b0b0;
+  --text-tertiary: #8c8c8c;
 
-  --border-primary: #2a322c;
-  --border-secondary: #202722;
+  --border-primary: #2a2a2a;
+  --border-secondary: #1e1e1e;
 
   --accent: #4fb3a1;
   --accent-hover: #6ec7b6;
