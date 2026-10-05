@@ -21,11 +21,6 @@ export default function Certifications() {
                 <h4 className="institution">{cert.name}</h4>
                 <p className="degree">{cert.issuer}</p>
               </div>
-              {cert.detail && (
-                <div className="education-meta">
-                  <span className="gpa">{cert.detail}</span>
-                </div>
-              )}
             </div>
           </div>
         ))}

@@ -149,7 +149,6 @@ export const certifications = [
   {
     name: "Certified Kubernetes Application Developer (CKAD)",
     issuer: "The Linux Foundation",
-    detail: "Score 92",
   },
   {
     name: "AWS Certified Developer – Associate",
@@ -158,10 +157,6 @@ export const certifications = [
   {
     name: "AWS Certified Cloud Practitioner",
     issuer: "Amazon Web Services",
-  },
-  {
-    name: "Top 50, JPMorgan Chase AWS AI Hackathon",
-    issuer: "JPMorgan Chase",
   },
 ];
 
