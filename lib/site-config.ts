@@ -165,20 +165,7 @@ export const certifications = [
   },
 ];
 
-type Position = {
-  title: string;
-  duration: string;
-  current: boolean;
-  context?: string;
-  points?: string[];
-  groups?: Array<{ label: string; points: string[] }>;
-};
-
-export const companies: Array<{
-  name: string;
-  url: string;
-  positions: Position[];
-}> = [
+export const companies = [
   {
     name: "JPMorgan Chase",
     url: "https://www.jpmorganchase.com",
@@ -193,35 +180,9 @@ export const companies: Array<{
           "Built catalog search across ~4,000 production APIs, combining lexical (BM25) and semantic vector retrieval behind a per-query router. Relevance rose ~40% over the lexical-only baseline.",
           "Built the pipeline that joins design-time data (API metadata, versions, proxies, subscriptions) with runtime telemetry from Envoy logs, attributing every request to an API, version, and subscriber. The platform’s analytics dashboards run on it.",
           "Integrated gRPC into the Go service that enforces per-subscription quotas, replacing its REST interface: p99 latency down ~60%, throughput roughly doubled.",
-        ],
-        groups: [
-          {
-            label: "Search and data",
-            points: [
-              "Took the vectoriser behind semantic search to production, then cut query latency and ranked results by semantic score over a richer search context.",
-              "Built the ingestion pipeline from the platform’s S3 into the data lake, and split the vectoriser’s OpenSearch sink from its data lake sink so a failure in one no longer blocks the other.",
-              "Added an analytics endpoint over the events index covering search requests and responses, and made analytics operations idempotent.",
-              "Added “updated after” filtering to the enriched API data so an internal AI assistant syncs incrementally instead of pulling everything each time.",
-            ],
-          },
-          {
-            label: "Platform",
-            points: [
-              "Moved proxy and subscription validation out of hardcoded if/else checks and into OPA policies, including the ServiceNow checks for both resource types.",
-              "Scaled analytics and account and subscription management to 15K concurrent subscriptions, partly by removing client ID persistence the request path never needed.",
-              "Built the subscription flow end to end: the creation UI with its ServiceNow details, plus cancel-request and resubscribe.",
-              "Moved the audit page from client-side to server-side data handling, fixed it dropping events, and tuned the backend-for-frontend for large AG Grid tables.",
-            ],
-          },
-          {
-            label: "Infrastructure and reliability",
-            points: [
-              "Diagnosed and resolved a critical production outage caused by an OpenSearch cluster reaching disk capacity, then resized the cluster with no data loss.",
-              "Migrated the platform’s EKS cluster across dev, test and prod, along with the changes the analytics services needed to move.",
-              "Added horizontal pod autoscaling to the event consumer and wired Splunk logging into the vectoriser for production debugging.",
-              "Updated and validated the base image to close critical security vulnerabilities.",
-            ],
-          },
+          "Moved proxy and subscription validation out of hardcoded if/else checks and into OPA policies.",
+          "Scaled analytics and account and subscription management to 15K concurrent subscriptions.",
+          "Diagnosed and resolved a critical production outage caused by an OpenSearch cluster reaching disk capacity, then resized the cluster with no data loss.",
         ],
       },
       {
