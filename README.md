@@ -1,74 +1,50 @@
-# Personal Website & Blog
+# yakshith15.github.io
 
-A modern, responsive personal website and blog built with [Next.js](https://nextjs.org/). Features a clean design, blog functionality with MDX support, and automated GitHub Pages deployment.
+Source for [yakshith15.github.io](https://yakshith15.github.io/), my personal site.
 
-## Live Site
-
-[https://Yakshith15.github.io/](https://Yakshith15.github.io/)
-
-## Quick Start Guide
-
-### 1. Clone and Setup
-
-```bash
-git clone https://github.com/Yakshith15/Yakshith15.github.io.git
-cd Yakshith15.github.io
-```
-
-### 2. Install Dependencies
+Next.js 14 with a static export, deployed to GitHub Pages by
+`.github/workflows/deploy.yml` on every push to `main`.
 
 ```bash
 npm install
+npm run dev      # http://localhost:3000, drafts included
+npm run build    # static site in out/
 ```
 
-### 3. Run Development Server
+## Where things live
 
-```bash
-npm run dev
-# Visit http://localhost:3000
-```
+| What | Where |
+| --- | --- |
+| Everything the site says about me: intro, work, projects, education | `lib/site-config.ts` |
+| Résumé (canonical source; the PDF is compiled from it) | `resume/resume.tex` → `public/resume.pdf` |
+| Posts | `content/blog/*.md` (MDX), served at `/writing/` |
+| Reading notes | `content/vault/`, a submodule of my Obsidian repo, served at `/vault/` |
+| Layout and type | `app/globals.css` |
 
-### 4. Add Blog Posts
+## Writing a post
 
-Create new posts in `content/blog/` as Markdown files:
+Add a Markdown or MDX file to `content/blog/`:
 
 ```markdown
-+++
-title = "Your Blog Post Title"
-date = 2024-01-15
-taxonomies = { tags = ["tag1", "tag2"] }
-+++
-
-Your content here...
+---
+title: "What building GFS taught me"
+date: 2026-12-01
+description: "One line that appears under the title and in the feed."
+tags: [storage, go]
+hidden: true
+---
 ```
 
-### 5. Build for Production
+`hidden: true` keeps a post a draft: it shows in `npm run dev` and is left
+out of the production build. Delete the line to publish. The Writing link in
+the nav and the Writing section on the home page only appear once at least
+one post is published.
 
-```bash
-npm run build
-```
+Posts can use `<Callout title="…">…</Callout>` without importing it.
 
-## Deployment
+## The vault
 
-1. **Fork this repository** and rename to `yourusername.github.io`
-2. **Enable GitHub Pages** in repository settings → Pages → Source: "GitHub Actions"
-3. **Push to main branch** - the included workflow will auto-deploy
-
-## Project Structure
-
-- `app/` - Next.js App Router pages and layouts
-- `components/` - React components
-- `content/blog/` - Blog posts (Markdown)
-- `lib/` - Utility functions
-- `public/` - Static assets (images, icons)
-
-## Available Scripts
-
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm run start` - Start production server
-- `npm run lint` - Run ESLint
-
-## Contributing
-
-Fork and use as a template for your own site!
+`content/vault` tracks the Obsidian repo. Only the folders listed in
+`lib/vault-config.ts` are published. A push to the Obsidian repo triggers a
+rebuild here through a `repository_dispatch` event. Vault pages are not
+linked from the nav, are left out of the sitemap, and are marked `noindex`.
