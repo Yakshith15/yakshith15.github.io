@@ -1,10 +1,10 @@
-+++
-title = "The Physics of Persistence"
-date = 2026-09-01
-description = "B-trees and LSM-trees, and why the choice comes down to read and write amplification."
-hidden = true
-taxonomies = { tags = ["system-design", "distributed-systems"] }
-+++
+---
+title: "The Physics of Persistence"
+date: 2026-09-01
+description: "B-trees and LSM-trees, and why the choice comes down to read and write amplification."
+hidden: true
+tags: [system-design, distributed-systems]
+---
 
 {/* Placeholder. Written from the "System Design from First Principles" series,
      but work through the reasoning yourself and use your own examples from the

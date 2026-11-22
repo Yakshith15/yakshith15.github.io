@@ -1,10 +1,10 @@
-+++
-title = "Microservices: Knowing When Not To"
-date = 2026-09-01
-description = "The coordination costs that a service boundary makes permanent."
-hidden = true
-taxonomies = { tags = ["system-design", "distributed-systems"] }
-+++
+---
+title: "Microservices: Knowing When Not To"
+date: 2026-09-01
+description: "The coordination costs that a service boundary makes permanent."
+hidden: true
+tags: [system-design, distributed-systems]
+---
 
 {/* Placeholder. Written from the "System Design from First Principles" series,
      but work through the reasoning yourself and use your own examples from the

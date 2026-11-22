@@ -1,10 +1,10 @@
-+++
-title = "Sharding: When One Disk Is Not Enough"
-date = 2026-09-01
-description = "Partitioning strategies, and the rebalancing problem each one creates."
-hidden = true
-taxonomies = { tags = ["system-design", "distributed-systems"] }
-+++
+---
+title: "Sharding: When One Disk Is Not Enough"
+date: 2026-09-01
+description: "Partitioning strategies, and the rebalancing problem each one creates."
+hidden: true
+tags: [system-design, distributed-systems]
+---
 
 {/* Placeholder. Written from the "System Design from First Principles" series,
      but work through the reasoning yourself and use your own examples from the

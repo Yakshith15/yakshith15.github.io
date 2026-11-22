@@ -4,6 +4,7 @@ import { Inter, JetBrains_Mono, Newsreader } from "next/font/google";
 import Masthead from "@/components/layout/Masthead";
 import Footer from "@/components/layout/Footer";
 import { siteConfig } from "@/lib/site-config";
+import { getAllPosts } from "@/lib/posts";
 import "./globals.css";
 
 const inter = Inter({
@@ -99,7 +100,7 @@ export default function RootLayout({
       </head>
       <body className={`${inter.variable} ${newsreader.variable} ${jetbrainsMono.variable}`}>
         <div className="shell">
-          <Masthead />
+          <Masthead hasWriting={getAllPosts().length > 0} />
           <main className="content">{children}</main>
         </div>
         <Footer />

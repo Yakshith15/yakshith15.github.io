@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import { contactLinks, navigation, siteConfig } from "@/lib/site-config";
 import ThemeToggle from "@/components/ui/ThemeToggle";
 
-export default function Masthead() {
+export default function Masthead({ hasWriting }: { hasWriting: boolean }) {
   const pathname = usePathname();
 
   const isActive = (url: string) => {
@@ -25,7 +25,7 @@ export default function Masthead() {
         </p>
 
         <nav className="masthead-nav">
-          {navigation.map((item) =>
+          {navigation.filter((item) => hasWriting || !item.needsPosts).map((item) =>
             item.newTab ? (
               <a
                 key={item.name}

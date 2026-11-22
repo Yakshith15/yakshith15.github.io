@@ -1,10 +1,10 @@
-+++
-title = "The Mathematics of the Second Attempt"
-date = 2026-09-01
-description = "Retries, backoff, jitter, and how naive retry logic causes outages."
-hidden = true
-taxonomies = { tags = ["system-design", "distributed-systems"] }
-+++
+---
+title: "The Mathematics of the Second Attempt"
+date: 2026-09-01
+description: "Retries, backoff, jitter, and how naive retry logic causes outages."
+hidden: true
+tags: [system-design, distributed-systems]
+---
 
 {/* Placeholder. Written from the "System Design from First Principles" series,
      but work through the reasoning yourself and use your own examples from the

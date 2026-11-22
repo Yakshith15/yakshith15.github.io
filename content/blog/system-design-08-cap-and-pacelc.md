@@ -1,10 +1,10 @@
-+++
-title = "CAP and PACELC"
-date = 2026-09-01
-description = "What CAP actually says, what it does not, and why PACELC is the more useful frame."
-hidden = true
-taxonomies = { tags = ["system-design", "distributed-systems"] }
-+++
+---
+title: "CAP and PACELC"
+date: 2026-09-01
+description: "What CAP actually says, what it does not, and why PACELC is the more useful frame."
+hidden: true
+tags: [system-design, distributed-systems]
+---
 
 {/* Placeholder. Written from the "System Design from First Principles" series,
      but work through the reasoning yourself and use your own examples from the

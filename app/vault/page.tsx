@@ -5,6 +5,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Vault",
   description: "Notes from my Obsidian vault, synced automatically.",
+  robots: { index: false },
 };
 
 function segmentsToHref(segments: string[]): string {

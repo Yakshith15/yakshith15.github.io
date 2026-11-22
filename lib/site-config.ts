@@ -10,10 +10,10 @@ export const siteConfig = {
   },
 };
 
-export const navigation: Array<{ name: string; url: string; newTab?: boolean }> = [
+export const navigation: Array<{ name: string; url: string; newTab?: boolean; needsPosts?: boolean }> = [
   { name: "Home", url: "/" },
   { name: "Projects", url: "/projects/" },
-  { name: "Blog", url: "/blog/" },
+  { name: "Writing", url: "/writing/", needsPosts: true },
   { name: "Resume", url: "/resume.pdf", newTab: true },
 ];
 

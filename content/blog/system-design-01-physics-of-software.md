@@ -1,10 +1,10 @@
-+++
-title = "The Physics of Software"
-date = 2026-09-01
-description = "The hardware limits every design decision eventually runs into."
-hidden = true
-taxonomies = { tags = ["system-design", "distributed-systems"] }
-+++
+---
+title: "The Physics of Software"
+date: 2026-09-01
+description: "The hardware limits every design decision eventually runs into."
+hidden: true
+tags: [system-design, distributed-systems]
+---
 
 {/* Placeholder. Written from the "System Design from First Principles" series,
      but work through the reasoning yourself and use your own examples from the

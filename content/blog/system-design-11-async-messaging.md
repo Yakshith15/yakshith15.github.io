@@ -1,10 +1,10 @@
-+++
-title = "Async Systems: Kafka, RabbitMQ, and SQS"
-date = 2026-09-01
-description = "Choosing a queue by the delivery guarantee you need."
-hidden = true
-taxonomies = { tags = ["system-design", "distributed-systems"] }
-+++
+---
+title: "Async Systems: Kafka, RabbitMQ, and SQS"
+date: 2026-09-01
+description: "Choosing a queue by the delivery guarantee you need."
+hidden: true
+tags: [system-design, distributed-systems]
+---
 
 {/* Placeholder. Written from the "System Design from First Principles" series,
      but work through the reasoning yourself and use your own examples from the

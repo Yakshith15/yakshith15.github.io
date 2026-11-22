@@ -1,10 +1,10 @@
-+++
-title = "Observability: How Not to Fly Blind"
-date = 2026-09-01
-description = "Logs, metrics, and traces, and what each one can and cannot tell you."
-hidden = true
-taxonomies = { tags = ["system-design", "distributed-systems"] }
-+++
+---
+title: "Observability: How Not to Fly Blind"
+date: 2026-09-01
+description: "Logs, metrics, and traces, and what each one can and cannot tell you."
+hidden: true
+tags: [system-design, distributed-systems]
+---
 
 {/* Placeholder. Written from the "System Design from First Principles" series,
      but work through the reasoning yourself and use your own examples from the

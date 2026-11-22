@@ -26,13 +26,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const note = getVaultNoteBySegments(slug);
   if (note) {
-    return { title: note.title, description: note.description };
+    return { title: note.title, description: note.description, robots: { index: false } };
   }
   const folder = getVaultNodeBySegments(slug);
   if (folder && folder.type === "folder") {
-    return { title: `${folder.name} — Vault` };
+    return { title: `${folder.name} · Vault`, robots: { index: false } };
   }
-  return { title: "Vault" };
+  return { title: "Vault", robots: { index: false } };
 }
 
 function segmentsToHref(segments: string[]): string {

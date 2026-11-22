@@ -4,27 +4,10 @@ import matter from "gray-matter";
 
 const postsDirectory = path.join(process.cwd(), "content/blog");
 
-// Convert tag to URL-safe slug
-export function slugifyTag(tag: string): string {
-  return tag
-    .toLowerCase()
-    .replace(/\s+/g, "-")
-    .replace(/[^a-z0-9-]/g, "");
-}
-
-export interface PostFrontmatter {
-  title: string;
-  date: string;
-  tags?: string[];
-  description?: string;
-  hidden?: boolean;
-}
-
-export interface Post {
-  slug: string;
-  frontmatter: PostFrontmatter;
-  content: string;
-}
+// Drafts (`hidden: true`) render in `next dev` so they can be previewed, and
+// are left out of production builds entirely: no page, no feed entry, no
+// sitemap URL.
+const showDrafts = process.env.NODE_ENV === "development";
 
 export interface PostMeta {
   slug: string;
@@ -32,178 +15,56 @@ export interface PostMeta {
   date: string;
   tags: string[];
   description?: string;
-  hidden?: boolean;
+  hidden: boolean;
 }
 
-function parseTomlFrontmatter(content: string): { data: Record<string, unknown>; content: string } {
-  // Handle TOML frontmatter (+++...+++)
-  const tomlMatch = content.match(/^\+\+\+\s*\n([\s\S]*?)\n\+\+\+\s*\n([\s\S]*)$/);
-  if (tomlMatch) {
-    const tomlContent = tomlMatch[1];
-    const bodyContent = tomlMatch[2];
-
-    const data: Record<string, unknown> = {};
-
-    // Parse simple TOML key-value pairs
-    const lines = tomlContent.split("\n");
-    for (const line of lines) {
-      const trimmedLine = line.trim();
-      if (!trimmedLine || trimmedLine.startsWith("#")) continue;
-
-      // Handle taxonomies = { tags = [...] }
-      const taxonomyMatch = trimmedLine.match(/^taxonomies\s*=\s*\{\s*tags\s*=\s*\[(.*)\]\s*\}$/);
-      if (taxonomyMatch) {
-        const tagsStr = taxonomyMatch[1];
-        data.tags = tagsStr.split(",").map((t) => t.trim().replace(/^["']|["']$/g, ""));
-        continue;
-      }
-
-      // Handle tags = [...]
-      const tagsMatch = trimmedLine.match(/^tags\s*=\s*\[(.*)\]$/);
-      if (tagsMatch) {
-        const tagsStr = tagsMatch[1];
-        data.tags = tagsStr.split(",").map((t) => t.trim().replace(/^["']|["']$/g, ""));
-        continue;
-      }
-
-      // Handle key = value
-      const kvMatch = trimmedLine.match(/^(\w+)\s*=\s*(.+)$/);
-      if (kvMatch) {
-        const key = kvMatch[1];
-        const rawValue = kvMatch[2].trim();
-
-        // Parse booleans
-        if (rawValue === "true") {
-          data[key] = true;
-          continue;
-        }
-        if (rawValue === "false") {
-          data[key] = false;
-          continue;
-        }
-
-        // Remove quotes for strings
-        let value: string = rawValue;
-        if ((value.startsWith('"') && value.endsWith('"')) ||
-            (value.startsWith("'") && value.endsWith("'"))) {
-          value = value.slice(1, -1);
-        }
-
-        data[key] = value;
-      }
-    }
-
-    return { data, content: bodyContent };
-  }
-
-  // Fallback to YAML frontmatter using gray-matter
-  return matter(content);
+export interface Post extends PostMeta {
+  content: string;
 }
 
-export function getAllPosts(includeHidden = false): PostMeta[] {
-  if (!fs.existsSync(postsDirectory)) {
-    return [];
-  }
+function toDateString(value: unknown): string {
+  if (value instanceof Date) return value.toISOString().slice(0, 10);
+  return String(value ?? "");
+}
 
-  const fileNames = fs.readdirSync(postsDirectory);
-  const posts = fileNames
-    .filter((fileName) => {
-      // Filter out _index.md and only include .md or .mdx files
-      return (
-        (fileName.endsWith(".md") || fileName.endsWith(".mdx")) &&
-        fileName !== "_index.md"
-      );
-    })
-    .map((fileName) => {
-      const slug = fileName.replace(/\.mdx?$/, "");
-      const fullPath = path.join(postsDirectory, fileName);
-      const fileContents = fs.readFileSync(fullPath, "utf8");
-      const { data } = parseTomlFrontmatter(fileContents);
+function readPost(fileName: string): Post {
+  const raw = fs.readFileSync(path.join(postsDirectory, fileName), "utf8");
+  const { data, content } = matter(raw);
+  return {
+    slug: fileName.replace(/\.mdx?$/, ""),
+    title: String(data.title ?? ""),
+    date: toDateString(data.date),
+    tags: Array.isArray(data.tags) ? data.tags.map(String) : [],
+    description: data.description ? String(data.description) : undefined,
+    hidden: data.hidden === true,
+    content,
+  };
+}
 
-      return {
-        slug,
-        title: data.title as string,
-        date: data.date as string,
-        tags: (data.tags as string[]) || [],
-        description: data.description as string | undefined,
-        hidden: data.hidden as boolean | undefined,
-      };
-    })
-    .filter((post) => includeHidden || !post.hidden)
-    .sort((a, b) => {
-      return new Date(b.date).getTime() - new Date(a.date).getTime();
-    });
+function loadPosts(): Post[] {
+  if (!fs.existsSync(postsDirectory)) return [];
+  return fs
+    .readdirSync(postsDirectory)
+    .filter((name) => /\.mdx?$/.test(name))
+    .map(readPost)
+    .filter((post) => showDrafts || !post.hidden)
+    .sort((a, b) => b.date.localeCompare(a.date));
+}
 
-  return posts;
+export function getAllPosts(): PostMeta[] {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  return loadPosts().map(({ content, ...meta }) => meta);
 }
 
 export function getPostBySlug(slug: string): Post | null {
-  // Try both .md and .mdx extensions
-  const extensions = [".mdx", ".md"];
-
-  for (const ext of extensions) {
-    const fullPath = path.join(postsDirectory, `${slug}${ext}`);
-
-    if (fs.existsSync(fullPath)) {
-      const fileContents = fs.readFileSync(fullPath, "utf8");
-      const { data, content } = parseTomlFrontmatter(fileContents);
-
-      return {
-        slug,
-        frontmatter: {
-          title: data.title as string,
-          date: data.date as string,
-          tags: (data.tags as string[]) || [],
-          description: data.description as string | undefined,
-          hidden: data.hidden as boolean | undefined,
-        },
-        content,
-      };
-    }
-  }
-
-  return null;
+  return loadPosts().find((post) => post.slug === slug) ?? null;
 }
 
-export function getAllTags(): { tag: string; slug: string; count: number }[] {
-  const posts = getAllPosts();
-  const tagData = new Map<string, { name: string; count: number }>();
-
-  posts.forEach((post) => {
-    post.tags.forEach((tag) => {
-      const slug = slugifyTag(tag);
-      const existing = tagData.get(slug);
-      if (existing) {
-        existing.count++;
-      } else {
-        tagData.set(slug, { name: tag, count: 1 });
-      }
-    });
+export function formatDate(date: string, style: "short" | "long" = "short"): string {
+  return new Date(`${date}T00:00:00Z`).toLocaleDateString("en-GB", {
+    timeZone: "UTC",
+    day: "numeric",
+    month: style === "long" ? "long" : "short",
+    year: "numeric",
   });
-
-  return Array.from(tagData.entries())
-    .map(([slug, { name, count }]) => ({ tag: name, slug, count }))
-    .sort((a, b) => b.count - a.count);
-}
-
-export function getPostsByTag(tagSlug: string): PostMeta[] {
-  return getAllPosts().filter((post) =>
-    post.tags.some((t) => slugifyTag(t) === tagSlug)
-  );
-}
-
-export function getAllPostSlugs(): string[] {
-  if (!fs.existsSync(postsDirectory)) {
-    return [];
-  }
-
-  const fileNames = fs.readdirSync(postsDirectory);
-  return fileNames
-    .filter((fileName) => {
-      return (
-        (fileName.endsWith(".md") || fileName.endsWith(".mdx")) &&
-        fileName !== "_index.md"
-      );
-    })
-    .map((fileName) => fileName.replace(/\.mdx?$/, ""));
 }

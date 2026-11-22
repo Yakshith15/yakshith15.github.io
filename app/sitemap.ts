@@ -1,34 +1,23 @@
 import type { MetadataRoute } from "next";
-import { getAllPosts, getAllTags } from "@/lib/posts";
-import { getAllVaultSegments } from "@/lib/vault";
+import { getAllPosts } from "@/lib/posts";
 import { siteConfig } from "@/lib/site-config";
 
 export const dynamic = "force-static";
 
+// The vault is deliberately absent: its notes are still outlines, and they
+// stay out of search results until they are written up.
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = siteConfig.baseUrl;
-  const now = new Date();
+  const posts = getAllPosts();
 
-  const staticRoutes = ["", "/projects", "/blog", "/tags", "/vault"].map((path) => ({
-    url: `${base}${path}/`,
-    lastModified: now,
-  }));
+  const pages = ["", "/projects"];
+  if (posts.length > 0) pages.push("/writing");
 
-  const posts = getAllPosts().map((post) => ({
-    url: `${base}/blog/${post.slug}/`,
-    lastModified: new Date(post.date),
-  }));
-
-  const tags = getAllTags().map((tag) => ({
-    url: `${base}/tags/${tag.slug}/`,
-    lastModified: now,
-  }));
-
-  const { notes, folders } = getAllVaultSegments();
-  const vault = [...notes, ...folders].map((segments) => ({
-    url: `${base}/vault/${segments.join("/")}/`,
-    lastModified: now,
-  }));
-
-  return [...staticRoutes, ...posts, ...tags, ...vault];
+  return [
+    ...pages.map((page) => ({ url: `${base}${page}/` })),
+    ...posts.map((post) => ({
+      url: `${base}/writing/${post.slug}/`,
+      lastModified: new Date(post.date),
+    })),
+  ];
 }

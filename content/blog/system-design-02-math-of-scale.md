@@ -1,10 +1,10 @@
-+++
-title = "The Math of Scale"
-date = 2026-09-01
-description = "Back-of-envelope numbers: latency, throughput, and what they imply."
-hidden = true
-taxonomies = { tags = ["system-design", "distributed-systems"] }
-+++
+---
+title: "The Math of Scale"
+date: 2026-09-01
+description: "Back-of-envelope numbers: latency, throughput, and what they imply."
+hidden: true
+tags: [system-design, distributed-systems]
+---
 
 {/* Placeholder. Written from the "System Design from First Principles" series,
      but work through the reasoning yourself and use your own examples from the

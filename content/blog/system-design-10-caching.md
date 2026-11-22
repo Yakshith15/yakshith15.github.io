@@ -1,10 +1,10 @@
-+++
-title = "Caching"
-date = 2026-09-01
-description = "Invalidation, coherence, and the failure modes a cache introduces."
-hidden = true
-taxonomies = { tags = ["system-design", "distributed-systems"] }
-+++
+---
+title: "Caching"
+date: 2026-09-01
+description: "Invalidation, coherence, and the failure modes a cache introduces."
+hidden: true
+tags: [system-design, distributed-systems]
+---
 
 {/* Placeholder. Written from the "System Design from First Principles" series,
      but work through the reasoning yourself and use your own examples from the
