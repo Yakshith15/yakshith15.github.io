@@ -1,29 +1,26 @@
 import type { Metadata } from "next";
 import Script from "next/script";
-import { Inter, JetBrains_Mono, Newsreader } from "next/font/google";
-import Masthead from "@/components/layout/Masthead";
-import Footer from "@/components/layout/Footer";
-import { siteConfig } from "@/lib/site-config";
+import { JetBrains_Mono, Newsreader } from "next/font/google";
+import SiteHeader from "@/components/layout/SiteHeader";
+import SiteFooter from "@/components/layout/SiteFooter";
 import { getAllPosts } from "@/lib/posts";
+import { siteConfig } from "@/lib/site-config";
 import "./globals.css";
-
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-sans",
-  display: "swap",
-});
 
 const newsreader = Newsreader({
   subsets: ["latin"],
+  style: ["normal", "italic"],
+  axes: ["opsz"],
   variable: "--font-serif",
   display: "swap",
-  weight: ["400", "500", "600"],
+  // next/font has no fallback metrics for Newsreader; use Georgia as-is.
   fallback: ["Georgia", "Times New Roman", "serif"],
   adjustFontFallback: false,
 });
 
 const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
+  weight: ["400", "500"],
   variable: "--font-mono",
   display: "swap",
 });
@@ -31,14 +28,12 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: {
     default: siteConfig.title,
-    template: `%s | ${siteConfig.title}`,
+    template: `%s · ${siteConfig.title}`,
   },
   description: siteConfig.description,
   metadataBase: new URL(siteConfig.baseUrl),
   alternates: {
-    types: {
-      "application/rss+xml": "/rss.xml",
-    },
+    types: { "application/rss+xml": "/rss.xml" },
   },
   openGraph: {
     type: "website",
@@ -47,14 +42,7 @@ export const metadata: Metadata = {
     title: siteConfig.title,
     description: siteConfig.description,
     locale: "en_US",
-    images: [
-      {
-        url: "/og.png",
-        width: 1200,
-        height: 630,
-        alt: siteConfig.author,
-      },
-    ],
+    images: [{ url: "/og.png", width: 1200, height: 630, alt: siteConfig.author }],
   },
   twitter: {
     card: "summary_large_image",
@@ -64,46 +52,35 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+// Runs before paint so the stored theme never flashes the wrong colours.
+const themeInit = `(function () {
+  var t = ${JSON.stringify(siteConfig.theme)};
+  var stored = t.toggleEnabled ? localStorage.getItem("theme") : null;
+  document.documentElement.setAttribute("data-theme", stored || t.defaultTheme);
+})();`;
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const hasWriting = getAllPosts().length > 0;
+
   return (
-    <html lang="en">
+    <html lang="en" className={`${newsreader.variable} ${jetbrainsMono.variable}`}>
       <head>
         <Script
           id="theme-init"
           strategy="beforeInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function() {
-                const themeConfig = ${JSON.stringify(siteConfig.theme)};
-                if (!themeConfig.toggleEnabled) {
-                  document.documentElement.setAttribute("data-theme", themeConfig.defaultTheme);
-                } else {
-                  const stored = localStorage.getItem("theme");
-                  if (stored) {
-                    document.documentElement.setAttribute("data-theme", stored);
-                  } else {
-                    document.documentElement.setAttribute("data-theme", themeConfig.defaultTheme);
-                  }
-                }
-              })();
-            `,
-          }}
+          dangerouslySetInnerHTML={{ __html: themeInit }}
         />
         <Script id="posthog" strategy="afterInteractive">
           {`!function(t,e){var o,n,p,r;e.__SV||(window.posthog&&window.posthog.__loaded)||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init hi $r kr ui wr Er capture Ri calculateEventProperties Ir register register_once register_for_session unregister unregister_for_session Fr getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey displaySurvey canRenderSurvey canRenderSurveyAsync identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty Cr Tr createPersonProfile Or yr Mr opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing get_explicit_consent_status is_capturing clear_opt_in_out_capturing Pr debug L Rr getPageViewId captureTraceFeedback captureTraceMetric gr".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
           posthog.init('phc_BA7JbimEExlzFzOBD8CxPM7L60JMhacMCxd9f3WPRMN',{api_host:'https://us.i.posthog.com',defaults:'2025-05-24',person_profiles:'identified_only'})`}
         </Script>
       </head>
-      <body className={`${inter.variable} ${newsreader.variable} ${jetbrainsMono.variable}`}>
-        <div className="shell">
-          <Masthead hasWriting={getAllPosts().length > 0} />
-          <main className="content">{children}</main>
+      <body>
+        <div className="page">
+          <SiteHeader hasWriting={hasWriting} />
+          <main>{children}</main>
+          <SiteFooter />
         </div>
-        <Footer />
       </body>
     </html>
   );

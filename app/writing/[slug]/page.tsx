@@ -4,8 +4,9 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
 import rehypeSlug from "rehype-slug";
-import { formatDate, getAllPosts, getPostBySlug } from "@/lib/posts";
+import Row from "@/components/Row";
 import { mdxComponents } from "@/components/mdx";
+import { formatDate, getAllPosts, getPostBySlug } from "@/lib/posts";
 
 interface Props {
   params: { slug: string };
@@ -13,8 +14,14 @@ interface Props {
 
 export const dynamicParams = false;
 
+// A static export refuses a dynamic route with no params at all, so while
+// nothing is published this emits one placeholder path, which renders 404.
+const NOTHING_PUBLISHED = "_";
+
 export function generateStaticParams() {
-  return getAllPosts().map((post) => ({ slug: post.slug }));
+  const posts = getAllPosts();
+  if (posts.length === 0) return [{ slug: NOTHING_PUBLISHED }];
+  return posts.map((post) => ({ slug: post.slug }));
 }
 
 export function generateMetadata({ params }: Props): Metadata {
@@ -28,26 +35,39 @@ export default function PostPage({ params }: Props) {
   if (!post) notFound();
 
   return (
-    <article className="blog-post">
-      <header className="post-header">
-        <h1 className="post-title">{post.title}</h1>
-        <div className="blog-meta">
-          <time dateTime={post.date}>{formatDate(post.date, "long")}</time>
-        </div>
-      </header>
+    <article>
+      <Row
+        className="article-head"
+        label={
+          <>
+            <time dateTime={post.date}>{formatDate(post.date, "long")}</time>
+            {post.tags.length > 0 && (
+              <>
+                <br />
+                {post.tags.join(", ")}
+              </>
+            )}
+          </>
+        }
+      >
+        <h1 className="article-title">{post.title}</h1>
+        {post.description && <p className="article-dek">{post.description}</p>}
+      </Row>
 
-      <div className="blog-content">
-        <MDXRemote
-          source={post.content}
-          components={mdxComponents}
-          options={{
-            mdxOptions: {
-              remarkPlugins: [remarkGfm],
-              rehypePlugins: [rehypeHighlight, rehypeSlug],
-            },
-          }}
-        />
-      </div>
+      <Row>
+        <div className="prose">
+          <MDXRemote
+            source={post.content}
+            components={mdxComponents}
+            options={{
+              mdxOptions: {
+                remarkPlugins: [remarkGfm],
+                rehypePlugins: [rehypeHighlight, rehypeSlug],
+              },
+            }}
+          />
+        </div>
+      </Row>
     </article>
   );
 }
