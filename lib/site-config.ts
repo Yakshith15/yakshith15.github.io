@@ -73,6 +73,23 @@ export type Project = {
 // Add `repo` and `writeup` only when the link resolves.
 export const projects: Project[] = [
   {
+    id: "moverr",
+    name: "Moverr",
+    status: "In progress",
+    language: "Go",
+    summary:
+      "A ride-hailing backend in Go, built one service at a time. The location service is running: it takes driver GPS pings over WebSocket, stores them in Postgres, and answers nearby-driver queries from a Redis geo index.",
+    description:
+      "Moverr is a ride-hailing backend, the kind behind Uber or Ola, planned as a set of Go services. The first one, the location service, is built: drivers stream GPS pings over WebSocket or HTTP, the pings persist to Postgres with PostGIS, and a Redis geo set, kept in step by an async dual-write, answers nearby-driver queries. A Go fleet simulator drives it with thousands of drivers. Matching, pricing and trips come next.",
+    highlights: [
+      "Load-tested at 2,000 simulated drivers: 80,000 pings stored in two minutes with zero errors and a p99 insert latency of 13.7 ms, after sizing the connection pool from Little's Law",
+      "Nearby-driver lookups from Redis at p99 3.4 ms, against 103.5 ms for the same query on PostGIS, in a local benchmark at that fleet size",
+      "Stale drivers evicted with TTL keys and a background sweeper, so a nearby query stays a single GEOSEARCH; the trade-off is written up as a design record",
+      "Fleet simulator with pluggable sinks: stdout, file, HTTP, and WebSocket with one persistent connection per driver",
+    ],
+    note: "The repository is not public yet.",
+  },
+  {
     id: "gfs",
     name: "Google File System",
     status: "In progress",
@@ -87,6 +104,7 @@ export const projects: Project[] = [
       "Lease-based primary writes for consistency",
       "Simulated chunkserver crashes to exercise recovery paths",
     ],
+    repo: "https://github.com/Yakshith15/GFS",
   },
   {
     id: "mit-6824",
