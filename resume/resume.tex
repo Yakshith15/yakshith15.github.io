@@ -1,12 +1,21 @@
 %==============================================================
-% Yakshith Daggupati — Resume
+% Yakshith Daggupati, resume
 %
-% Canonical source for resume.pdf. Single column, no tables,
-% no images, no icon fonts — parses cleanly in ATS screeners.
+% Canonical source for resume.pdf. One page, one column: no
+% tables, no images, no icon fonts, nothing in the page header or
+% footer, so it parses cleanly in ATS screeners.
 %
-% Compile:  tectonic resume.tex        (recommended, one binary)
-%       or  pdflatex resume.tex        (run twice for links)
-%       or  paste into overleaf.com
+% Compile with pdfLaTeX (Overleaf's default). Run twice for links.
+%
+% Design, to match the site:
+%   - Source Serif Pro for text, Source Code Pro for dates and
+%     other keys: the print pair closest to the site's Newsreader
+%     and JetBrains Mono.
+%   - One accent, pine #10685C, on the name and on the section
+%     rules and headings. Everything else is black, so the page
+%     prints cleanly in greyscale.
+%   - Bullets hang in the left margin, so every line of text
+%     starts on the same edge, like the site's ledger.
 %
 % Keep this to ONE page. If it spills, cut the weakest bullet.
 %==============================================================
@@ -14,119 +23,181 @@
 
 \usepackage[left=0.6in,right=0.6in,top=0.5in,bottom=0.5in]{geometry}
 \usepackage[T1]{fontenc}
-\usepackage[utf8]{inputenc}
-\usepackage{charter}
-\usepackage{enumitem}
-\usepackage{titlesec}
-\usepackage[hidelinks]{hyperref}
+\usepackage{sourceserifpro}   % text face
+\usepackage{sourcecodepro}    % dates and keys
 \usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+
+\hypersetup{
+  pdftitle={Yakshith Daggupati, Resume},
+  pdfauthor={Yakshith Daggupati}
+}
+
+% Give every glyph a Unicode mapping, so ATS parsers and copy and
+% paste read ligatures as plain letters. pdfLaTeX only, so guarded.
+\ifdefined\pdfgentounicode
+  \input{glyphtounicode}
+  \pdfgentounicode=1
+\fi
+
+\definecolor{pine}{HTML}{10685C}
 
 \pagestyle{empty}
 \raggedright
 \setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\setcounter{secnumdepth}{0}
 
-% --- Section headings: small caps, rule underneath -----------
+% === Section headings: a pine hairline over an italic pine label
 \titleformat{\section}
-  {\normalsize\bfseries\scshape}
-  {}{0em}{}[\vspace{-0.6em}\rule{\textwidth}{0.6pt}]
-\titlespacing{\section}{0pt}{1.0em}{0.5em}
+  {\color{pine}\titlerule[0.5pt]\vspace{0.3em}\normalfont\large\itshape}
+  {}{0pt}{}
+\titlespacing{\section}{0pt}{0.8em}{0.35em}
 
-% --- Bullets -------------------------------------------------
+% === Bullets hang in the margin; their text starts on the left edge
 \setlist[itemize]{
-  leftmargin=1.1em,
-  topsep=0.15em,
-  itemsep=0.15em,
-  parsep=0pt,
-  label=\textbullet
+  label={\small\textbullet},
+  leftmargin=0pt,
+  labelwidth=0.6em,
+  labelsep=0.5em,
+  topsep=0.2em,
+  partopsep=0pt,
+  itemsep=0.12em,
+  parsep=0pt
 }
 
-% --- Role line: title on the left, dates flush right ---------
-\newcommand{\role}[2]{%
-  \textbf{#1}\hfill\textit{#2}\par\vspace{0.15em}%
-}
-\newcommand{\org}[2]{%
-  \textbf{#1}\hfill\textbf{#2}\par\vspace{0.1em}%
-}
+% === Building blocks ============================================
+% A key: dates and other metadata, in small mono.
+\newcommand{\cvkey}[1]{{\footnotesize\ttfamily #1}}
+
+% Glue that outranks the fil glue \raggedright puts at the end of
+% each line, so keys sit flush right. A plain \hfill would share
+% the leftover space with \rightskip and stop short of the margin.
+\newcommand{\cvfill}{\hspace{0pt plus 1filll}}
+
+% \cvemployer{employer}{key}: employer a size up, key flush right.
+\newcommand{\cvemployer}[2]{\par{\large #1}\cvfill\cvkey{#2}\par}
+
+% \cvcontext{text}: one short paragraph of context, set small.
+\newcommand{\cvcontext}[1]{{\small #1\par}}
+
+% \cvrole{title}{dates}: bold title, dates flush right.
+\newcommand{\cvrole}[2]{\par\textbf{#1}\cvfill\cvkey{#2}\par}
+
+% \cvproject{name}{what it is}{stack}{key}: stack in italics,
+% key (status, repo link) flush right.
+\newcommand{\cvproject}[4]{%
+  \par\textbf{#1}: #2\quad\textit{#3}\cvfill\cvkey{#4}\par}
+
+% \cvskill{label}{items}: label in a fixed-width key column.
+\newlength{\cvkeywidth}
+\newcommand{\cvskill}[2]{%
+  \par\hangindent=\cvkeywidth\hangafter=1
+  \makebox[\cvkeywidth][l]{\cvkey{#1}}#2\par}
 
 %==============================================================
 \begin{document}
 
-% ------------------------- HEADER ---------------------------
-\begin{center}
-  {\LARGE\bfseries Yakshith Daggupati}\\[0.45em]
-  % TODO: add your phone number — recruiters still ask for it.
-  Hyderabad, India \textbullet{} %
-  \href{mailto:daggupatiyakshithnaidu@gmail.com}{daggupatiyakshithnaidu@gmail.com}\\[0.25em]
-  \href{https://github.com/Yakshith15}{github.com/Yakshith15} \textbullet{} %
-  \href{https://www.linkedin.com/in/yakshithnaidu/}{linkedin.com/in/yakshithnaidu} \textbullet{} %
-  \href{https://yakshith15.github.io}{yakshith15.github.io}
-\end{center}
+% ========================= HEADER ===========================
+{\color{pine}\fontsize{22}{26}\selectfont Yakshith Daggupati\par}
+\vspace{0.3em}
+% TODO: add your phone number; recruiters still ask for it.
+{\small
+Hyderabad, India\quad
+\href{mailto:daggupatiyakshithnaidu@gmail.com}{daggupatiyakshithnaidu@gmail.com}\par
+\href{https://github.com/Yakshith15}{github.com/Yakshith15}\quad
+\href{https://www.linkedin.com/in/yakshithnaidu/}{linkedin.com/in/yakshithnaidu}\quad
+\href{https://yakshith15.github.io}{yakshith15.github.io}\par}
 
-\vspace{0.4em}
-
-% ------------------------ EXPERIENCE ------------------------
+% ======================== EXPERIENCE ========================
 \section{Experience}
 
-\org{JPMorgan Chase}{Jul 2025 -- Present}
-\role{Software Engineer I}{Hyderabad, India}
-{\small\itshape API Marketplace Platform. Teams publish APIs as Envoy-fronted proxies and other teams subscribe under quota, across \textasciitilde4{,}000 APIs, \textasciitilde40{,}000 proxies, and \textasciitilde100{,}000 subscriptions. My team owns the system of record for every API, its analytics, and search.\par}
-\vspace{0.3em}
+\cvemployer{JPMorgan Chase}{Hyderabad, India}
+\vspace{0.1em}
+\cvcontext{API Marketplace Platform: teams publish \textasciitilde4,000 APIs as
+  \textasciitilde40,000 Envoy-fronted proxies, and other teams subscribe under quota
+  (\textasciitilde100,000 subscriptions). My team owns the system of record for every
+  API, its analytics, and search.}
+\vspace{0.35em}
+
+\cvrole{Software Engineer I}{Jul 2025 \textendash{} Present}
 \begin{itemize}
-  \item Built catalog search across \textasciitilde4{,}000 production APIs, combining lexical
+  \item Built catalog search across \textasciitilde4,000 production APIs, combining lexical
         (BM25) and semantic vector retrieval behind a per-query router. Relevance rose
         \textasciitilde40\% over the lexical-only baseline.
-  \item Built the pipeline joining design-time data (API metadata, versions, proxies,
-        subscriptions) with runtime telemetry from Envoy logs, attributing every request to
-        an API, version, and subscriber. The platform's analytics dashboards run on it.
+  \item Built the analytics pipeline that joins API metadata with Envoy logs to attribute
+        every request to an API, version, and subscriber, then scaled it from a ceiling of
+        10K events at once to 300K in under 90 minutes. No longer saving the full API
+        record on every change also cut OpenSearch storage by 40\%.
   \item Integrated gRPC into the Go service that enforces per-subscription quotas, replacing
         its REST interface: p99 latency down \textasciitilde60\%, throughput roughly doubled.
-  \item Work across the platform stack: portal frontend, backend services, and the
-        infrastructure they run on.
 \end{itemize}
 
-\vspace{0.5em}
-\role{Software Engineer Intern}{Jan 2025 -- Jul 2025}
+\vspace{0.45em}
+\cvrole{Software Engineer Intern}{Jan 2025 \textendash{} Jul 2025}
 \begin{itemize}
   \item Migrated critical secrets from Kubernetes Secrets, which are only base64-encoded, to
         AWS Secrets Manager for encryption at rest, IAM-scoped access, and audit logging.
   \item Built frontend features for the marketplace portal, the surface teams use to publish
         APIs and manage subscriptions.
+  % TODO: third internship bullet, pending from Yakshith
 \end{itemize}
 
-% ------------------------- PROJECTS -------------------------
+% ========================= PROJECTS =========================
 \section{Projects}
 
-\role{Google File System, built from scratch}{Go}
+\cvproject{Moverr}{ride-hailing backend}{Go, Postgres/PostGIS, Redis}{In progress}
+\begin{itemize}
+  \item Built the location service: drivers stream GPS pings over WebSocket into Postgres,
+        with an async dual-write to a Redis geo index that serves nearby-driver queries.
+        TTL keys and a background sweeper evict stale drivers.
+  \item Load-tested it with a Go fleet simulator: 2,000 drivers, 80,000 pings in two
+        minutes, zero errors, p99 insert latency 13.7\,ms after sizing the connection pool
+        with Little's Law. In a local benchmark, nearby-driver lookups from Redis ran at p99
+        3.4\,ms against 103.5\,ms for the same query on PostGIS.
+\end{itemize}
+
+\vspace{0.45em}
+\cvproject{Google File System}{built from scratch}{Go}{%
+  \href{https://github.com/Yakshith15/GFS}{github.com/Yakshith15/GFS}\quad In progress}
 \begin{itemize}
   \item Reimplementing the GFS paper end to end: a master coordinating chunk metadata and
         leases, chunkservers storing 64\,MB chunks, and a client library handling lookup and
         streaming reads and writes.
   \item Exercises recovery paths through simulated chunkserver crashes, and uses
         lease-based primary writes to hold the paper's consistency guarantees.
-  % TODO: add the repo link once it is public, e.g.
-  % \href{https://github.com/Yakshith15/gfs}{github.com/Yakshith15/gfs}
 \end{itemize}
 
-\vspace{0.5em}
-\role{MIT 6.824 Distributed Systems Labs}{Go}
+\vspace{0.45em}
+\cvproject{MIT 6.824 Distributed Systems}{labs 1 and 2}{Go}{}
 \begin{itemize}
   \item Implemented MapReduce with task reassignment on worker failure, and a linearizable
         key/value server that holds at-most-once semantics while clients retry over an
         unreliable network.
 \end{itemize}
 
-% ------------------------- EDUCATION ------------------------
+% ========================= EDUCATION ========================
 \section{Education}
 
-\org{Chaitanya Bharathi Institute of Technology}{Dec 2021 -- May 2025}
-B.E., Computer Science Engineering (AI \& ML) \textbullet{} 9.4 / 10 CGPA
+\cvrole{Chaitanya Bharathi Institute of Technology}{Dec 2021 \textendash{} May 2025}
+B.E., Computer Science Engineering (AI \& ML), 9.4 / 10 CGPA\par
 
-% -------------------------- SKILLS --------------------------
-\section{Technical Skills}
+% ========================== SKILLS ==========================
+\section{Skills}
 
-\textbf{Languages:} Go, Java, Python, TypeScript, JavaScript, C++\\[0.2em]
-\textbf{Infrastructure:} AWS, Docker, Kubernetes, gRPC, CI/CD\\[0.2em]
-\textbf{Data:} PostgreSQL, Redis, ETL pipelines, vector and lexical search\\[0.2em]
-\textbf{Focus:} Distributed systems, backend services, system design
+\settowidth{\cvkeywidth}{\cvkey{Infrastructure}}
+\addtolength{\cvkeywidth}{1.2em}
+\cvskill{Languages}{Go, Java, Python, TypeScript, JavaScript, C++}
+\cvskill{Infrastructure}{AWS, Docker, Kubernetes, gRPC, CI/CD}
+\cvskill{Data}{PostgreSQL, Redis, ETL pipelines, vector and lexical search}
+\cvskill{Focus}{Distributed systems, backend services, system design}
+
+% ====================== CERTIFICATIONS ======================
+\section{Certifications}
+
+Certified Kubernetes Application Developer (CKAD)\par
+AWS Certified Developer -- Associate, AWS Certified Cloud Practitioner\par
 
 \end{document}
