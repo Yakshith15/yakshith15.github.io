@@ -1,7 +1,7 @@
 /*
  * Layout is a ledger: a narrow gutter of keys on the left, serif text on the
- * right. Every section uses the same two columns, so labels, dates and
- * figures line up down the whole page. Below 720px the gutter folds on top.
+ * right. Every section uses the same two columns, so labels and dates
+ * line up down the whole page. Below 720px the gutter folds on top.
  */
 
 :root {
@@ -102,7 +102,7 @@ p {
   text-wrap: pretty;
 }
 
-/* Small mono type: keys, dates, nav, figures. */
+/* Small mono type: keys, dates, nav. */
 .key,
 .site-nav,
 .meta,
@@ -233,12 +233,6 @@ main {
   margin-top: 1.75rem;
 }
 
-.figure {
-  display: block;
-  margin-top: 0.15rem;
-  color: var(--accent);
-}
-
 /* ---------- Home ---------- */
 
 /* Intro: text on the left from the page edge, portrait on the right. */
@@ -291,15 +285,43 @@ main {
 }
 
 .role {
-  margin-top: 2.5rem;
+  margin-top: 1.5rem;
 }
 
-.role-title {
+.role + .role {
+  margin-top: 2rem;
+}
+
+.role-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.25rem 1rem;
   font-size: 1.1875rem;
+  font-weight: 500;
 }
 
-.role-title + .context {
-  margin-top: 0.25rem;
+.role-head .meta {
+  font-weight: 400;
+}
+
+.work-list {
+  margin: 0.6rem 0 0;
+  padding-left: 1.1rem;
+}
+
+.work-list li + li {
+  margin-top: 0.55rem;
+}
+
+.work-list li::marker {
+  color: var(--ink-3);
+}
+
+.work-list strong {
+  font-weight: 600;
+  color: var(--ink);
 }
 
 .points {
@@ -318,13 +340,7 @@ main {
   text-decoration-color: currentColor;
 }
 
-.context {
-  color: var(--ink-2);
-}
 
-.employer + .context {
-  margin-top: 0.4rem;
-}
 
 .entry-title {
   font-size: 1.375rem;
@@ -704,10 +720,6 @@ main {
   .stack .row > .key {
     display: flex;
     gap: 0.75rem;
-  }
-
-  .figure {
-    margin-top: 0;
   }
 
   .intro {

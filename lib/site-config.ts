@@ -24,58 +24,34 @@ export const links = {
 export const intro =
   "I care about how large systems hold together: storage, consistency, and the failure cases nobody plans for. I tend to learn things by building them from scratch and writing down what surprised me.";
 
-// `key` sits in the left gutter so the list can be scanned; `figure`, when a
-// point has a number worth pulling out, sits under it. Figures must come
-// straight from the sentence beside them.
-export type WorkPoint = { key: string; figure?: string; text: string };
-
+// Each point is one sentence or two. Wrap the result worth catching in
+// **double asterisks** and it renders bold. Keep the wording in step with
+// resume/resume.tex.
 export type Role = {
   title: string;
   dates: string;
-  note?: string;
-  points: WorkPoint[];
+  points: string[];
 };
 
-// Three points per role, matching the order on the résumé.
 export const work = {
   employer: "JPMorgan Chase",
   url: "https://www.jpmorganchase.com",
-  context:
-    "API Marketplace Platform. Teams publish APIs as Envoy-fronted proxies, other teams subscribe under quota. My team owns the system of record, its analytics, and search.",
   roles: [
     {
       title: "Software Engineer I",
       dates: "Jul 2025 – present",
       points: [
-        {
-          key: "Search",
-          figure: "~40% relevance",
-          text: "Built catalog search across ~4,000 production APIs, combining lexical (BM25) and semantic vector retrieval behind a per-query router. Relevance rose ~40% over the lexical-only baseline.",
-        },
-        {
-          key: "Analytics",
-          text: "Built the pipeline that joins design-time data (API metadata, versions, proxies, subscriptions) with runtime telemetry from Envoy logs, attributing every request to an API, version, and subscriber. The platform’s analytics dashboards run on it.",
-        },
-        {
-          key: "Quotas",
-          figure: "~60% lower p99",
-          text: "Integrated gRPC into the Go service that enforces per-subscription quotas, replacing its REST interface: p99 latency down ~60%, throughput roughly doubled.",
-        },
+        "Built catalog search across ~4,000 production APIs, combining lexical (BM25) and semantic vector retrieval behind a per-query router. Relevance rose **~40%** over the lexical-only baseline.",
+        "Built the analytics pipeline that joins API metadata with Envoy logs to attribute every request to an API, version, and subscriber, then scaled it from a ceiling of 10K events at once to **300K in under 90 minutes**. No longer saving the full API record on every change also cut OpenSearch storage by **40%**.",
+        "Integrated gRPC into the Go service that enforces per-subscription quotas, replacing its REST interface: p99 latency down **~60%**, throughput **roughly doubled**.",
       ],
     },
     {
       title: "Software Engineer Intern",
       dates: "Jan 2025 – Jul 2025",
-      note: "Joined the same platform, working on the developer-facing portal.",
       points: [
-        {
-          key: "Secrets",
-          text: "Migrated critical secrets from Kubernetes Secrets, which are only base64-encoded, to AWS Secrets Manager for encryption at rest, IAM-scoped access, and audit logging.",
-        },
-        {
-          key: "Portal",
-          text: "Built frontend features for the portal, the surface teams use to publish APIs and manage subscriptions.",
-        },
+        "Migrated critical secrets from Kubernetes Secrets, which are only base64-encoded, to AWS Secrets Manager for encryption at rest, IAM-scoped access, and audit logging.",
+        "Built frontend features for the portal, the surface teams use to publish APIs and manage subscriptions.",
       ],
     },
   ] as Role[],

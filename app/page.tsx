@@ -10,27 +10,15 @@ import {
   siteConfig,
   stack,
   work,
-  type WorkPoint,
 } from "@/lib/site-config";
 import { formatDate, getAllPosts } from "@/lib/posts";
 
-function Points({ points }: { points: WorkPoint[] }) {
+// Renders **marked** spans in a work point as <strong>.
+function Emphasis({ text }: { text: string }) {
   return (
-    <div className="stack points">
-      {points.map((point) => (
-        <Row
-          key={point.key}
-          label={
-            <>
-              {point.key}
-              {point.figure && <span className="figure">{point.figure}</span>}
-            </>
-          }
-        >
-          <p>{point.text}</p>
-        </Row>
-      ))}
-    </div>
+    <>
+      {text.split("**").map((part, i) => (i % 2 === 1 ? <strong key={i}>{part}</strong> : part))}
+    </>
   );
 }
 
@@ -77,19 +65,23 @@ export default function Home() {
                 {work.employer}
               </a>
             </p>
-            <p className="context">{work.context}</p>
+            {work.roles.map((role) => (
+              <div key={role.title} className="role">
+                <h3 className="role-head">
+                  <span className="role-title">{role.title}</span>
+                  <span className="meta">{role.dates}</span>
+                </h3>
+                <ul className="work-list">
+                  {role.points.map((point) => (
+                    <li key={point}>
+                      <Emphasis text={point} />
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
           </div>
         </div>
-
-        {work.roles.map((role) => (
-          <div key={role.title} className="role">
-            <Row label={role.dates}>
-              <h3 className="role-title">{role.title}</h3>
-              {role.note && <p className="context">{role.note}</p>}
-            </Row>
-            <Points points={role.points} />
-          </div>
-        ))}
       </section>
 
       <section className="section" id="projects" aria-labelledby="projects-label">
