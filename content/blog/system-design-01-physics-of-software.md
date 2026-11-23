@@ -8,7 +8,7 @@ tags: [system-design, distributed-systems]
 
 {/* Placeholder. Written from the "System Design from First Principles" series,
      but work through the reasoning yourself and use your own examples from the
-     API marketplace platform where they fit. Delete `hidden = true` to publish. */}
+     API marketplace platform where they fit. Delete `hidden: true` to publish. */}
 
 ## The problem
 
