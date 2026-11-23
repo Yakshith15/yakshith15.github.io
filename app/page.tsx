@@ -12,6 +12,7 @@ import {
   work,
 } from "@/lib/site-config";
 import { formatDate, getAllPosts } from "@/lib/posts";
+import { resumeHref } from "@/lib/resume";
 
 // Renders **marked** spans in a work point as <strong>.
 function Emphasis({ text }: { text: string }) {
@@ -47,7 +48,7 @@ export default function Home() {
             <a href={links.linkedin} target="_blank" rel="noopener noreferrer">
               LinkedIn
             </a>
-            <a href={links.resume} target="_blank" rel="noopener noreferrer">
+            <a href={resumeHref()} target="_blank" rel="noopener noreferrer">
               Résumé (PDF)
             </a>
           </p>

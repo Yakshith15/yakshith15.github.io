@@ -2,10 +2,16 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { links, siteConfig } from "@/lib/site-config";
+import { siteConfig } from "@/lib/site-config";
 import ThemeToggle from "@/components/ui/ThemeToggle";
 
-export default function SiteHeader({ hasWriting }: { hasWriting: boolean }) {
+export default function SiteHeader({
+  hasWriting,
+  resumeHref,
+}: {
+  hasWriting: boolean;
+  resumeHref: string;
+}) {
   const pathname = usePathname();
 
   const nav = [{ name: "Projects", href: "/projects/" }];
@@ -30,7 +36,7 @@ export default function SiteHeader({ hasWriting }: { hasWriting: boolean }) {
             {item.name}
           </Link>
         ))}
-        <a href={links.resume} target="_blank" rel="noopener noreferrer">
+        <a href={resumeHref} target="_blank" rel="noopener noreferrer">
           Résumé ↗
         </a>
         <ThemeToggle />

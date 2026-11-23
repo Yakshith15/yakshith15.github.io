@@ -4,6 +4,7 @@ import { JetBrains_Mono, Newsreader } from "next/font/google";
 import SiteHeader from "@/components/layout/SiteHeader";
 import SiteFooter from "@/components/layout/SiteFooter";
 import { getAllPosts } from "@/lib/posts";
+import { resumeHref } from "@/lib/resume";
 import { siteConfig } from "@/lib/site-config";
 import "./globals.css";
 
@@ -77,7 +78,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body>
         <div className="page">
-          <SiteHeader hasWriting={hasWriting} />
+          <SiteHeader hasWriting={hasWriting} resumeHref={resumeHref()} />
           <main>{children}</main>
           <SiteFooter />
         </div>
