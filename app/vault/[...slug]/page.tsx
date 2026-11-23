@@ -5,7 +5,6 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
 import rehypeSlug from "rehype-slug";
-import Row from "@/components/Row";
 import VaultIndex, { vaultHref } from "@/components/VaultIndex";
 import {
   getAllVaultSegments,
@@ -70,12 +69,14 @@ export default function VaultSlugPage({ params }: Props) {
 
     return (
       <article>
-        <Row className="article-head" label={<Crumbs segments={slug} />}>
+        <header className="article-head">
+          <p className="meta">
+            <Crumbs segments={slug} />
+          </p>
           <h1 className="article-title">{note.title}</h1>
           {note.description && <p className="article-dek">{note.description}</p>}
-        </Row>
-        <Row>
-          <div className="prose">
+        </header>
+        <div className="prose">
             <MDXRemote
               source={note.body}
               components={{ img: VaultImg }}
@@ -86,8 +87,7 @@ export default function VaultSlugPage({ params }: Props) {
                 },
               }}
             />
-          </div>
-        </Row>
+        </div>
       </article>
     );
   }
@@ -97,12 +97,13 @@ export default function VaultSlugPage({ params }: Props) {
 
   return (
     <>
-      <Row className="page-head" label={<Crumbs segments={slug} />}>
+      <header className="page-head">
+        <p className="meta">
+          <Crumbs segments={slug} />
+        </p>
         <h1 className="page-title">{node.name}</h1>
-      </Row>
-      <section className="section">
-        <VaultIndex nodes={node.children} />
-      </section>
+      </header>
+      <VaultIndex nodes={node.children} />
     </>
   );
 }

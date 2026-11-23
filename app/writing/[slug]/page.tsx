@@ -4,7 +4,6 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
 import rehypeSlug from "rehype-slug";
-import Row from "@/components/Row";
 import { mdxComponents } from "@/components/mdx";
 import { formatDate, getAllPosts, getPostBySlug } from "@/lib/posts";
 
@@ -36,38 +35,27 @@ export default function PostPage({ params }: Props) {
 
   return (
     <article>
-      <Row
-        className="article-head"
-        label={
-          <>
-            <time dateTime={post.date}>{formatDate(post.date, "long")}</time>
-            {post.tags.length > 0 && (
-              <>
-                <br />
-                {post.tags.join(", ")}
-              </>
-            )}
-          </>
-        }
-      >
+      <header className="article-head">
+        <p className="meta">
+          <time dateTime={post.date}>{formatDate(post.date, "long")}</time>
+          {post.tags.length > 0 && <> · {post.tags.join(", ")}</>}
+        </p>
         <h1 className="article-title">{post.title}</h1>
         {post.description && <p className="article-dek">{post.description}</p>}
-      </Row>
+      </header>
 
-      <Row>
-        <div className="prose">
-          <MDXRemote
-            source={post.content}
-            components={mdxComponents}
-            options={{
-              mdxOptions: {
-                remarkPlugins: [remarkGfm],
-                rehypePlugins: [rehypeHighlight, rehypeSlug],
-              },
-            }}
-          />
-        </div>
-      </Row>
+      <div className="prose">
+        <MDXRemote
+          source={post.content}
+          components={mdxComponents}
+          options={{
+            mdxOptions: {
+              remarkPlugins: [remarkGfm],
+              rehypePlugins: [rehypeHighlight, rehypeSlug],
+            },
+          }}
+        />
+      </div>
     </article>
   );
 }

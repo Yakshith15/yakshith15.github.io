@@ -1,6 +1,5 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import Row from "@/components/Row";
 import { formatDate, getAllPosts } from "@/lib/posts";
 
 export const metadata: Metadata = {
@@ -13,31 +12,30 @@ export default function WritingPage() {
 
   return (
     <>
-      <Row className="page-head">
+      <header className="page-head">
         <h1 className="page-title">Writing</h1>
         <p className="page-intro">Notes on things I have built and what they taught me.</p>
-      </Row>
+      </header>
 
-      <section className="section">
-        {posts.length === 0 ? (
-          <Row>
-            <p className="muted">Nothing published yet.</p>
-          </Row>
-        ) : (
-          <ul className="index-list">
-            {posts.map((post) => (
-              <li key={post.slug}>
-                <Row label={<time dateTime={post.date}>{formatDate(post.date)}</time>}>
-                  <Link href={`/writing/${post.slug}/`} className="index-title">
-                    {post.title}
-                  </Link>
-                  {post.description && <p className="index-desc">{post.description}</p>}
-                </Row>
-              </li>
-            ))}
-          </ul>
-        )}
-      </section>
+      {posts.length === 0 ? (
+        <p className="muted section">Nothing published yet.</p>
+      ) : (
+        <ul className="index-list">
+          {posts.map((post) => (
+            <li key={post.slug}>
+              <div className="line">
+                <Link href={`/writing/${post.slug}/`} className="index-title">
+                  {post.title}
+                </Link>
+                <time className="meta" dateTime={post.date}>
+                  {formatDate(post.date)}
+                </time>
+              </div>
+              {post.description && <p className="index-desc">{post.description}</p>}
+            </li>
+          ))}
+        </ul>
+      )}
     </>
   );
 }

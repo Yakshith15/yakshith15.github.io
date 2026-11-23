@@ -1,13 +1,13 @@
 import Link from "next/link";
-import Row from "@/components/Row";
 
 export default function NotFound() {
   return (
-    <Row className="not-found" label="404">
+    <div className="not-found">
+      <p className="meta">404</p>
       <h1 className="page-title">Nothing here.</h1>
       <p>
         The page may have moved. <Link href="/">Start from the home page.</Link>
       </p>
-    </Row>
+    </div>
   );
 }

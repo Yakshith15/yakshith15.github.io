@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import Row from "@/components/Row";
+import Section from "@/components/Section";
 import {
   certifications,
   education,
@@ -54,109 +54,98 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section" id="work" aria-labelledby="work-label">
-        <div className="row">
-          <h2 className="section-label" id="work-label">
-            Work
-          </h2>
-          <div>
-            <p className="employer">
-              <a href={work.url} target="_blank" rel="noopener noreferrer">
-                {work.employer}
-              </a>
-            </p>
-            {work.roles.map((role) => (
-              <div key={role.title} className="role">
-                <h3 className="role-head">
-                  <span className="role-title">{role.title}</span>
-                  <span className="meta">{role.dates}</span>
-                </h3>
-                <ul className="work-list">
-                  {role.points.map((point) => (
-                    <li key={point}>
-                      <Emphasis text={point} />
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section" id="projects" aria-labelledby="projects-label">
-        <div className="row">
-          <h2 className="section-label" id="projects-label">
-            Projects
-          </h2>
-          <div className="stack">
-            {projects.map((project) => (
-              <article key={project.id} className="entry">
-                <h3 className="entry-title">
-                  <Link href={`/projects/#${project.id}`}>{project.name}</Link>
-                </h3>
-                <p className="entry-body">{project.summary}</p>
-                <p className="meta">
-                  {project.language} · {project.status}
-                </p>
-              </article>
-            ))}
-            <p className="more meta">
-              <Link href="/projects/">How each one works →</Link>
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {posts.length > 0 && (
-        <section className="section" id="writing" aria-labelledby="writing-label">
-          <div className="row">
-            <h2 className="section-label" id="writing-label">
-              Writing
-            </h2>
-            <div className="stack">
-              {posts.map((post) => (
-                <article key={post.slug} className="entry">
-                  <h3 className="entry-title">
-                    <Link href={`/writing/${post.slug}/`}>{post.title}</Link>
-                  </h3>
-                  {post.description && <p className="entry-body">{post.description}</p>}
-                  <p className="meta">{formatDate(post.date)}</p>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
-
-      <section className="section" id="background" aria-labelledby="background-label">
-        <div className="row">
-          <h2 className="section-label" id="background-label">
-            Background
-          </h2>
-          <div>
-            <p>{education.degree}</p>
-            <p className="meta">
-              {education.institution} · {education.dates} · {education.grade}
-            </p>
-          </div>
-        </div>
-        <div className="stack points">
-          <Row label="Certified">
-            <ul className="plain-list">
-              {certifications.map((cert) => (
-                <li key={cert}>{cert}</li>
+      <Section id="work" title="Work">
+        <p className="employer">
+          <a href={work.url} target="_blank" rel="noopener noreferrer">
+            {work.employer}
+          </a>
+        </p>
+        {work.roles.map((role) => (
+          <div key={role.title} className="role">
+            <h3 className="role-head line">
+              <span>{role.title}</span>
+              <span className="meta">{role.dates}</span>
+            </h3>
+            <ul className="work-list">
+              {role.points.map((point) => (
+                <li key={point}>
+                  <Emphasis text={point} />
+                </li>
               ))}
             </ul>
-          </Row>
-          <Row label="Languages">
-            <p>{stack.languages.join(", ")}</p>
-          </Row>
-          <Row label="Tools">
-            <p>{stack.tools.join(", ")}</p>
-          </Row>
+          </div>
+        ))}
+      </Section>
+
+      <Section id="projects" title="Projects">
+        <div className="entries">
+          {projects.map((project) => (
+            <article key={project.id}>
+              <h3 className="entry-head line">
+                <Link href={`/projects/#${project.id}`}>{project.name}</Link>
+                <span className="meta">
+                  {project.language} · {project.status}
+                </span>
+              </h3>
+              <p className="entry-body">{project.summary}</p>
+            </article>
+          ))}
         </div>
-      </section>
+        <p className="more meta">
+          <Link href="/projects/">How each one works →</Link>
+        </p>
+      </Section>
+
+      {posts.length > 0 && (
+        <Section id="writing" title="Writing">
+          <div className="entries">
+            {posts.map((post) => (
+              <article key={post.slug}>
+                <h3 className="entry-head line">
+                  <Link href={`/writing/${post.slug}/`}>{post.title}</Link>
+                  <time className="meta" dateTime={post.date}>
+                    {formatDate(post.date)}
+                  </time>
+                </h3>
+                {post.description && <p className="entry-body">{post.description}</p>}
+              </article>
+            ))}
+          </div>
+        </Section>
+      )}
+
+      <Section id="background" title="Background">
+        <dl className="facts">
+          <div>
+            <dt className="label">Education</dt>
+            <dd>
+              {education.degree}
+              <br />
+              <span className="muted">
+                {education.institution}, {education.dates}, {education.grade}
+              </span>
+            </dd>
+          </div>
+          <div>
+            <dt className="label">Certifications</dt>
+            <dd>
+              <ul className="plain-list">
+                {certifications.map((cert) => (
+                  <li key={cert}>{cert}</li>
+                ))}
+              </ul>
+            </dd>
+          </div>
+          <div>
+            <dt className="label">Languages</dt>
+            <dd>{stack.languages.join(", ")}</dd>
+          </div>
+          <div>
+            <dt className="label">Tools</dt>
+            <dd>{stack.tools.join(", ")}</dd>
+          </div>
+        </dl>
+      </Section>
     </>
   );
 }

@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Row from "@/components/Row";
 import VaultIndex from "@/components/VaultIndex";
 import { getVaultTree } from "@/lib/vault";
 
@@ -14,7 +13,7 @@ export const metadata: Metadata = {
 export default function VaultPage() {
   return (
     <>
-      <Row className="page-head">
+      <header className="page-head">
         <h1 className="page-title">Vault</h1>
         <p className="page-intro">
           Reading notes on papers and books, synced from my{" "}
@@ -23,10 +22,8 @@ export default function VaultPage() {
           </a>
           .
         </p>
-      </Row>
-      <section className="section">
-        <VaultIndex nodes={getVaultTree()} />
-      </section>
+      </header>
+      <VaultIndex nodes={getVaultTree()} />
     </>
   );
 }

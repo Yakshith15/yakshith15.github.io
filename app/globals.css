@@ -1,7 +1,7 @@
 /*
- * Layout is a ledger: a narrow gutter of keys on the left, serif text on the
- * right. Every section uses the same two columns, so labels and dates
- * line up down the whole page. Below 720px the gutter folds on top.
+ * One centred column. Section titles sit above their content with a hairline
+ * running out to the right edge; dates and status ride on the right of the
+ * line they belong to, in small mono.
  */
 
 :root {
@@ -17,10 +17,7 @@
   --accent: #10685c;
   --code-bg: #f1f0e9;
 
-  --gutter: 9.5rem;
-  --gap: 2.5rem;
-  --measure: 36rem;
-  --page: calc(var(--gutter) + var(--gap) + var(--measure));
+  --page: 42rem;
 }
 
 [data-theme="dark"] {
@@ -73,7 +70,6 @@ a {
   text-decoration-thickness: 1px;
   text-decoration-color: var(--rule);
   text-underline-offset: 0.2em;
-  transition: text-decoration-color 120ms ease, color 120ms ease;
 }
 
 a:hover {
@@ -92,7 +88,7 @@ h2,
 h3,
 h4 {
   font-weight: 500;
-  line-height: 1.2;
+  line-height: 1.25;
   margin: 0;
   text-wrap: balance;
 }
@@ -102,10 +98,10 @@ p {
   text-wrap: pretty;
 }
 
-/* Small mono type: keys, dates, nav. */
-.key,
+/* Small mono type: dates, status, nav, labels. */
 .site-nav,
 .meta,
+.label,
 .colophon {
   font-family: var(--mono);
   font-size: 0.75rem;
@@ -113,6 +109,10 @@ p {
   letter-spacing: 0.01em;
   font-variant-numeric: tabular-nums;
   color: var(--ink-3);
+}
+
+.muted {
+  color: var(--ink-2);
 }
 
 /* ---------- Page frame ---------- */
@@ -201,46 +201,51 @@ main {
   color: var(--ink-2);
 }
 
-/* ---------- The ledger ---------- */
-
-.row {
-  display: grid;
-  grid-template-columns: var(--gutter) minmax(0, var(--measure));
-  column-gap: var(--gap);
-}
-
-.row > .key {
-  padding-top: 0.3em;
-}
+/* ---------- Sections ---------- */
 
 .section {
-  padding: 2.75rem 0 0;
+  padding-top: 3rem;
 }
 
-.section + .section {
-  margin-top: 2.75rem;
-  border-top: 1px solid var(--rule);
-}
-
-.section-label {
+/* "Work ————————" : the title, then a hairline to the right edge. */
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  font-size: 1.25rem;
   font-style: italic;
-  font-size: 1.125rem;
-  color: var(--ink);
-  margin: 0;
 }
 
-.stack > * + * {
-  margin-top: 1.75rem;
+.section-title::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--rule);
+}
+
+/* A line with a title on the left and a date or status on the right. */
+.line {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.15rem 1rem;
+}
+
+.line .meta {
+  font-weight: 400;
+  font-style: normal;
 }
 
 /* ---------- Home ---------- */
 
-/* Intro: text on the left from the page edge, portrait on the right. */
+/* Intro: text on the left, portrait on the right. */
 .intro {
   padding-top: 3rem;
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
-  column-gap: var(--gap);
+  column-gap: 2rem;
   align-items: start;
 }
 
@@ -263,7 +268,7 @@ main {
 }
 
 .lede {
-  font-size: 1.5rem;
+  font-size: 1.4375rem;
   line-height: 1.4;
   letter-spacing: -0.005em;
 }
@@ -279,55 +284,6 @@ main {
   color: var(--ink-2);
 }
 
-.intro + .section {
-  margin-top: 2.75rem;
-  border-top: 1px solid var(--rule);
-}
-
-.role {
-  margin-top: 1.5rem;
-}
-
-.role + .role {
-  margin-top: 2rem;
-}
-
-.role-head {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: 0.25rem 1rem;
-  font-size: 1.1875rem;
-  font-weight: 500;
-}
-
-.role-head .meta {
-  font-weight: 400;
-}
-
-.work-list {
-  margin: 0.6rem 0 0;
-  padding-left: 1.1rem;
-}
-
-.work-list li + li {
-  margin-top: 0.55rem;
-}
-
-.work-list li::marker {
-  color: var(--ink-3);
-}
-
-.work-list strong {
-  font-weight: 600;
-  color: var(--ink);
-}
-
-.points {
-  margin-top: 1.5rem;
-}
-
 .employer {
   font-size: 1.375rem;
 }
@@ -340,27 +296,55 @@ main {
   text-decoration-color: currentColor;
 }
 
-
-
-.entry-title {
-  font-size: 1.375rem;
+.role {
+  margin-top: 1.25rem;
 }
 
-.entry-title a {
+.role + .role {
+  margin-top: 1.75rem;
+}
+
+.role-head {
+  font-size: 1.125rem;
+}
+
+.work-list {
+  margin: 0.5rem 0 0;
+  padding-left: 1.1rem;
+}
+
+.work-list li + li {
+  margin-top: 0.5rem;
+}
+
+.work-list li::marker {
+  color: var(--ink-3);
+}
+
+.work-list strong {
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.entries > * + * {
+  margin-top: 1.5rem;
+}
+
+.entry-head {
+  font-size: 1.25rem;
+}
+
+.entry-head a {
   text-decoration-color: transparent;
 }
 
-.entry-title a:hover {
+.entry-head a:hover {
   text-decoration-color: currentColor;
 }
 
 .entry-body {
-  margin-top: 0.35rem;
+  margin-top: 0.3rem;
   color: var(--ink-2);
-}
-
-.entry .meta {
-  margin-top: 0.5rem;
 }
 
 .more {
@@ -371,6 +355,21 @@ main {
   color: var(--ink-2);
 }
 
+/* Background: small mono label above each group, no side column. */
+.facts {
+  margin: 0;
+  display: grid;
+  gap: 1.25rem;
+}
+
+.facts dt {
+  margin-bottom: 0.2rem;
+}
+
+.facts dd {
+  margin: 0;
+}
+
 .plain-list {
   list-style: none;
   margin: 0;
@@ -378,22 +377,13 @@ main {
 }
 
 .plain-list li + li {
-  margin-top: 0.15rem;
+  margin-top: 0.1rem;
 }
 
-.muted {
-  color: var(--ink-2);
-}
-
-/* ---------- Project detail ---------- */
+/* ---------- Inner pages ---------- */
 
 .page-head {
-  padding: 3rem 0 0;
-}
-
-.page-head > .key,
-.article-head > .key {
-  padding-top: 0.85rem;
+  padding-top: 3rem;
 }
 
 .page-title {
@@ -402,22 +392,33 @@ main {
 }
 
 .page-intro {
-  margin-top: 0.75rem;
+  margin-top: 0.6rem;
   color: var(--ink-2);
+}
+
+.project {
+  padding-top: 2.5rem;
+  scroll-margin-top: 1rem;
+}
+
+.project + .project {
+  margin-top: 2.5rem;
+  border-top: 1px solid var(--rule);
 }
 
 .project-name {
   font-size: 1.625rem;
   letter-spacing: -0.01em;
-  scroll-margin-top: 2rem;
 }
 
-.project > * + * {
+.project .line + p {
+  margin-top: 0.75rem;
+}
+
+.project p + p,
+.project p + ul,
+.project ul + p {
   margin-top: 1rem;
-}
-
-.project-name + p {
-  margin-top: 0.6rem;
 }
 
 .project ul {
@@ -432,15 +433,17 @@ main {
 
 .links {
   margin-top: 1.25rem;
-  font-size: 0.8125rem;
   display: flex;
   gap: 1.25rem;
+  font-size: 0.8125rem;
 }
 
-/* ---------- Article (writing and vault) ---------- */
-
 .article-head {
-  padding: 3rem 0 2.5rem;
+  padding: 3rem 0 2.25rem;
+}
+
+.article-head .meta {
+  margin-bottom: 0.75rem;
 }
 
 .article-title {
@@ -645,17 +648,14 @@ main {
 
 .index-list {
   list-style: none;
-  margin: 0;
+  margin: 2rem 0 0;
   padding: 0;
+  border-top: 1px solid var(--rule);
 }
 
 .index-list li {
-  padding: 0.7rem 0;
+  padding: 0.8rem 0;
   border-bottom: 1px solid var(--rule);
-}
-
-.index-list li:first-child {
-  padding-top: 0;
 }
 
 .index-title {
@@ -670,7 +670,7 @@ main {
 .index-desc {
   color: var(--ink-2);
   font-size: 1rem;
-  margin-top: 0.1rem;
+  margin-top: 0.15rem;
 }
 
 /* ---------- 404 ---------- */
@@ -702,33 +702,10 @@ main {
     padding-top: 1.75rem;
   }
 
-  .row {
-    grid-template-columns: minmax(0, 1fr);
-    row-gap: 0.5rem;
-  }
-
-  .row > .key,
-  .page-head > .key,
-  .article-head > .key {
-    padding-top: 0;
-  }
-
-  .row > .key:empty {
-    display: none;
-  }
-
-  .stack .row > .key {
-    display: flex;
-    gap: 0.75rem;
-  }
-
-  .intro {
-    padding-top: 2rem;
-  }
-
-  /* On a phone the portrait floats right and the intro wraps around it. */
+  /* The portrait floats right and the intro wraps around it. */
   .intro {
     display: block;
+    padding-top: 2rem;
   }
 
   .intro .portrait {
@@ -748,11 +725,7 @@ main {
 
   .section,
   .page-head {
-    padding-top: 2rem;
-  }
-
-  .section + .section {
-    margin-top: 2rem;
+    padding-top: 2.25rem;
   }
 
   .page-title,
