@@ -103,25 +103,9 @@ export const projects: Project[] = [
       "Master election and heartbeat-driven chunkserver tracking",
       "Lease-based primary writes for consistency",
       "Simulated chunkserver crashes to exercise recovery paths",
+      "Next: replace the single master with a Raft-replicated master group, so the cluster keeps serving through a master failure",
     ],
     repo: "https://github.com/Yakshith15/GFS",
-  },
-  {
-    id: "mit-6824",
-    name: "MIT 6.824 Distributed Systems Labs",
-    status: "Labs 1 and 2",
-    language: "Go",
-    summary:
-      "Implemented MapReduce and a linearizable key/value server from the ground up in Go, validated against the course test suite.",
-    description:
-      "Labs 1 and 2 of MIT 6.824. Lab 1 builds a MapReduce coordinator and worker pool that reassigns tasks when a worker dies mid-job. Lab 2 builds a key/value server that stays linearizable while clients retry over an unreliable network, which means detecting duplicate requests and applying each operation at most once.",
-    highlights: [
-      "MapReduce coordinator with task reassignment on worker failure",
-      "Linearizable key/value server backed by Go RPC",
-      "At-most-once semantics: duplicate client retries detected and never reapplied",
-      "Validated against the full course test suite, including the unreliable-network cases",
-    ],
-    note: "The code stays private, since the course asks students not to publish solutions.",
   },
 ];
 
