@@ -127,9 +127,9 @@ Hyderabad, India\quad
   \item Built catalog search across \textasciitilde4,000 production APIs, combining lexical
         (BM25) and semantic vector retrieval behind a per-query router. Relevance rose
         \textasciitilde40\% over the lexical-only baseline.
-  \item Built the analytics pipeline that joins API metadata with Envoy logs to attribute
-        every request to an API, version, and subscriber, then scaled it from a ceiling of
-        10K events at once to 300K in under 90 minutes. No longer saving the full API
+  \item Built the analytics pipeline that attributes every request to an API, version, and
+        subscriber, then scaled it from a ceiling of 10K events at once to 300K in under
+        90 minutes. No longer saving the full API
         record on every change also cut OpenSearch storage by 40\%.
   \item Integrated gRPC into the Go service that enforces per-subscription quotas, replacing
         its REST interface: p99 latency down \textasciitilde60\%, throughput roughly doubled.
@@ -148,7 +148,7 @@ Hyderabad, India\quad
 % ========================= PROJECTS =========================
 \section{Projects}
 
-\cvproject{Moverr}{ride-hailing backend}{Go, Postgres/PostGIS, Redis}{In progress}
+\cvproject{Moverr}{ride-hailing location service}{Go, Postgres/PostGIS, Redis}{2026}
 \begin{itemize}
   \item Built the location service: drivers stream GPS pings over WebSocket into Postgres,
         with an async dual-write to a Redis geo index that serves nearby-driver queries.

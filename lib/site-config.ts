@@ -42,7 +42,7 @@ export const work = {
       dates: "Jul 2025 – present",
       points: [
         "Built catalog search across ~4,000 production APIs, combining lexical (BM25) and semantic vector retrieval behind a per-query router. Relevance rose **~40%** over the lexical-only baseline.",
-        "Built the analytics pipeline that joins API metadata with Envoy logs to attribute every request to an API, version, and subscriber, then scaled it from a ceiling of 10K events at once to **300K in under 90 minutes**. No longer saving the full API record on every change also cut OpenSearch storage by **40%**.",
+        "Built the analytics pipeline that attributes every request to an API, version, and subscriber, then scaled it from a ceiling of 10K events at once to **300K in under 90 minutes**. No longer saving the full API record on every change also cut OpenSearch storage by **40%**.",
         "Integrated gRPC into the Go service that enforces per-subscription quotas, replacing its REST interface: p99 latency down **~60%**, throughput **roughly doubled**.",
       ],
     },
@@ -75,12 +75,12 @@ export const projects: Project[] = [
   {
     id: "moverr",
     name: "Moverr",
-    status: "In progress",
+    status: "2026",
     language: "Go",
     summary:
-      "A ride-hailing backend in Go, built one service at a time. The location service is running: it takes driver GPS pings over WebSocket, stores them in Postgres, and answers nearby-driver queries from a Redis geo index.",
+      "A ride-hailing location service in Go: it takes driver GPS pings over WebSocket, stores them in Postgres, and answers nearby-driver queries from a Redis geo index.",
     description:
-      "Moverr is a ride-hailing backend, the kind behind Uber or Ola, planned as a set of Go services. The first one, the location service, is built: drivers stream GPS pings over WebSocket or HTTP, the pings persist to Postgres with PostGIS, and a Redis geo set, kept in step by an async dual-write, answers nearby-driver queries. A Go fleet simulator drives it with thousands of drivers. Matching, pricing and trips come next.",
+      "Moverr is the location service behind a ride-hailing app, the kind Uber or Ola runs. Drivers stream GPS pings over WebSocket or HTTP, the pings persist to Postgres with PostGIS, and a Redis geo set, kept in step by an async dual-write, answers nearby-driver queries fast enough for a matching loop. A Go fleet simulator drives it with thousands of drivers.",
     highlights: [
       "Load-tested at 2,000 simulated drivers: 80,000 pings stored in two minutes with zero errors and a p99 insert latency of 13.7 ms, after sizing the connection pool from Little's Law",
       "Nearby-driver lookups from Redis at p99 3.4 ms, against 103.5 ms for the same query on PostGIS, in a local benchmark at that fleet size",
