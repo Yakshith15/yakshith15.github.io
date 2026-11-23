@@ -42,7 +42,7 @@ export const work = {
       dates: "Jul 2025 – present",
       points: [
         "Built catalog search across ~4,000 production APIs, combining lexical (BM25) and semantic vector retrieval behind a per-query router. Relevance rose **~40%** over the lexical-only baseline.",
-        "Built the analytics pipeline that assembles the latest state of each API, fetching and enriching its sub-resources (versions, proxies, and subscriptions) and saving it to an OpenSearch index, then scaled it from a ceiling of 10K events at once to **300K in under 90 minutes**. No longer saving the full API record on every change also cut OpenSearch storage by **40%**.",
+        "Scaled the analytics pipeline that keeps each API’s latest state in OpenSearch, enriched with its versions, proxies, and subscriptions: from 15K events in 6 hours to **300K in under 90 minutes, about 80x the throughput**. No longer saving the full API record on every change also cut index storage by **40%**.",
         "Integrated gRPC into the global rate limiting service that enforces per-subscription quotas, replacing its REST interface: p99 latency down **~60%**, throughput **roughly doubled**.",
       ],
     },
