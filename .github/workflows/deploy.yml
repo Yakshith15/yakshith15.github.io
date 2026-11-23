@@ -43,8 +43,17 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      # On failure, the tail of the build output is posted as an error
+      # annotation, which shows on the run page and through the API without
+      # needing admin access to download logs.
       - name: Build site
-        run: npm run build
+        run: |
+          set -o pipefail
+          if ! npm run build 2>&1 | tee build.log; then
+            tail -n 40 build.log | sed -e 's/%/%25/g' | awk 'BEGIN{ORS="%0A"} {print}' > build-tail.txt
+            echo "::error title=next build failed::$(cat build-tail.txt)"
+            exit 1
+          fi
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
