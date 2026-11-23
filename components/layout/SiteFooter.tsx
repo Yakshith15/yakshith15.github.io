@@ -15,7 +15,7 @@ export default function SiteFooter() {
         .
       </p>
       <p className="colophon">
-        © {new Date().getFullYear()} {siteConfig.author}. Set in Newsreader and JetBrains Mono.
+        © {new Date().getFullYear()} {siteConfig.author}
       </p>
     </footer>
   );

@@ -24,69 +24,61 @@ export const links = {
 export const intro =
   "I care about how large systems hold together: storage, consistency, and the failure cases nobody plans for. I tend to learn things by building them from scratch and writing down what surprised me.";
 
-// One line at the top of the home page. Keep it true: change or remove it
-// when the work it describes stops.
-export const currently = {
-  text: "Building the Google File System from scratch in Go.",
-  href: "/projects/#gfs",
-};
-
 // `key` sits in the left gutter so the list can be scanned; `figure`, when a
 // point has a number worth pulling out, sits under it. Figures must come
 // straight from the sentence beside them.
 export type WorkPoint = { key: string; figure?: string; text: string };
 
+export type Role = {
+  title: string;
+  dates: string;
+  note?: string;
+  points: WorkPoint[];
+};
+
+// Three points per role, matching the order on the résumé.
 export const work = {
   employer: "JPMorgan Chase",
   url: "https://www.jpmorganchase.com",
-  roles: [
-    { title: "Software Engineer I", dates: "Jul 2025 – present" },
-    { title: "Software Engineer Intern", dates: "Jan 2025 – Jul 2025" },
-  ],
   context:
     "API Marketplace Platform. Teams publish APIs as Envoy-fronted proxies, other teams subscribe under quota. My team owns the system of record, its analytics, and search.",
-  points: [
+  roles: [
     {
-      key: "Search",
-      figure: "~40% relevance",
-      text: "Built catalog search across ~4,000 production APIs, combining lexical (BM25) and semantic vector retrieval behind a per-query router. Relevance rose ~40% over the lexical-only baseline.",
+      title: "Software Engineer I",
+      dates: "Jul 2025 – present",
+      points: [
+        {
+          key: "Search",
+          figure: "~40% relevance",
+          text: "Built catalog search across ~4,000 production APIs, combining lexical (BM25) and semantic vector retrieval behind a per-query router. Relevance rose ~40% over the lexical-only baseline.",
+        },
+        {
+          key: "Analytics",
+          text: "Built the pipeline that joins design-time data (API metadata, versions, proxies, subscriptions) with runtime telemetry from Envoy logs, attributing every request to an API, version, and subscriber. The platform’s analytics dashboards run on it.",
+        },
+        {
+          key: "Quotas",
+          figure: "~60% lower p99",
+          text: "Integrated gRPC into the Go service that enforces per-subscription quotas, replacing its REST interface: p99 latency down ~60%, throughput roughly doubled.",
+        },
+      ],
     },
     {
-      key: "Analytics",
-      text: "Built the pipeline that joins design-time data (API metadata, versions, proxies, subscriptions) with runtime telemetry from Envoy logs, attributing every request to an API, version, and subscriber. The platform’s analytics dashboards run on it.",
+      title: "Software Engineer Intern",
+      dates: "Jan 2025 – Jul 2025",
+      note: "Joined the same platform, working on the developer-facing portal.",
+      points: [
+        {
+          key: "Secrets",
+          text: "Migrated critical secrets from Kubernetes Secrets, which are only base64-encoded, to AWS Secrets Manager for encryption at rest, IAM-scoped access, and audit logging.",
+        },
+        {
+          key: "Portal",
+          text: "Built frontend features for the portal, the surface teams use to publish APIs and manage subscriptions.",
+        },
+      ],
     },
-    {
-      key: "Quotas",
-      figure: "~60% lower p99",
-      text: "Integrated gRPC into the Go service that enforces per-subscription quotas, replacing its REST interface: p99 latency down ~60%, throughput roughly doubled.",
-    },
-    {
-      key: "Policy",
-      text: "Moved proxy and subscription validation out of hardcoded if/else checks and into OPA policies.",
-    },
-    {
-      key: "Scale",
-      figure: "15K subscriptions",
-      text: "Scaled analytics and account and subscription management to 15K concurrent subscriptions.",
-    },
-    {
-      key: "Incident",
-      text: "Diagnosed and resolved a critical production outage caused by an OpenSearch cluster reaching disk capacity, then resized the cluster with no data loss.",
-    },
-  ] as WorkPoint[],
-  internship: {
-    context: "Joined the same platform, working on the developer-facing portal.",
-    points: [
-      {
-        key: "Secrets",
-        text: "Migrated critical secrets from Kubernetes Secrets, which are only base64-encoded, to AWS Secrets Manager for encryption at rest, IAM-scoped access, and audit logging.",
-      },
-      {
-        key: "Portal",
-        text: "Built frontend features for the portal, the surface teams use to publish APIs and manage subscriptions.",
-      },
-    ] as WorkPoint[],
-  },
+  ] as Role[],
 };
 
 export type Project = {

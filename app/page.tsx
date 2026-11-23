@@ -3,7 +3,6 @@ import Link from "next/link";
 import Row from "@/components/Row";
 import {
   certifications,
-  currently,
   education,
   intro,
   links,
@@ -40,19 +39,17 @@ export default function Home() {
 
   return (
     <>
-      <section className="intro row" aria-label="Introduction">
-        <div>
-          <Image
-            src="/images/profile.jpg"
-            alt={siteConfig.author}
-            width={176}
-            height={176}
-            className="portrait"
-            draggable={false}
-            priority
-          />
-        </div>
-        <div>
+      <section className="intro" aria-label="Introduction">
+        <Image
+          src="/images/profile.jpg"
+          alt={siteConfig.author}
+          width={256}
+          height={256}
+          className="portrait"
+          draggable={false}
+          priority
+        />
+        <div className="intro-text">
           <p className="lede">{intro}</p>
           <p className="meta intro-links">
             <a href={links.email}>Email</a>
@@ -69,12 +66,6 @@ export default function Home() {
         </div>
       </section>
 
-      <Row label="Now" className="now">
-        <p>
-          <Link href={currently.href}>{currently.text}</Link>
-        </p>
-      </Row>
-
       <section className="section" id="work" aria-labelledby="work-label">
         <div className="row">
           <h2 className="section-label" id="work-label">
@@ -86,26 +77,19 @@ export default function Home() {
                 {work.employer}
               </a>
             </p>
-            <div className="roles">
-              {work.roles.map((role) => (
-                <p key={role.title} className="meta">
-                  {role.title} · {role.dates}
-                </p>
-              ))}
-            </div>
             <p className="context">{work.context}</p>
           </div>
         </div>
 
-        <Points points={work.points} />
-
-        <Row className="subhead">
-          <p className="context">
-            <em>As an intern.</em> {work.internship.context}
-          </p>
-        </Row>
-
-        <Points points={work.internship.points} />
+        {work.roles.map((role) => (
+          <div key={role.title} className="role">
+            <Row label={role.dates}>
+              <h3 className="role-title">{role.title}</h3>
+              {role.note && <p className="context">{role.note}</p>}
+            </Row>
+            <Points points={role.points} />
+          </div>
+        ))}
       </section>
 
       <section className="section" id="projects" aria-labelledby="projects-label">

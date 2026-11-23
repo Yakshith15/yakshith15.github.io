@@ -241,11 +241,23 @@ main {
 
 /* ---------- Home ---------- */
 
+/* Intro: text on the left from the page edge, portrait on the right. */
 .intro {
   padding-top: 3rem;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  column-gap: var(--gap);
+  align-items: start;
+}
+
+.intro-text {
+  grid-column: 1;
+  grid-row: 1;
 }
 
 .intro .portrait {
+  grid-column: 2;
+  grid-row: 1;
   display: block;
   width: 8rem;
   height: 8rem;
@@ -273,18 +285,25 @@ main {
   color: var(--ink-2);
 }
 
-.now {
-  margin-top: 2.5rem;
-  padding-top: 1rem;
+.intro + .section {
+  margin-top: 2.75rem;
   border-top: 1px solid var(--rule);
 }
 
-.points {
-  margin-top: 2rem;
+.role {
+  margin-top: 2.5rem;
 }
 
-.subhead {
-  margin-top: 2.5rem;
+.role-title {
+  font-size: 1.1875rem;
+}
+
+.role-title + .context {
+  margin-top: 0.25rem;
+}
+
+.points {
+  margin-top: 1.5rem;
 }
 
 .employer {
@@ -299,22 +318,12 @@ main {
   text-decoration-color: currentColor;
 }
 
-.roles {
-  margin-top: 0.4rem;
-  display: grid;
-  gap: 0.1rem;
-}
-
-.roles .meta {
-  font-size: 0.8125rem;
-}
-
 .context {
   color: var(--ink-2);
 }
 
-.roles + .context {
-  margin-top: 1rem;
+.employer + .context {
+  margin-top: 0.4rem;
 }
 
 .entry-title {
@@ -705,10 +714,20 @@ main {
     padding-top: 2rem;
   }
 
+  /* On a phone the portrait floats right and the intro wraps around it. */
+  .intro {
+    display: block;
+  }
+
   .intro .portrait {
-    width: 5rem;
-    height: 5rem;
-    margin-bottom: 0.75rem;
+    float: right;
+    width: 5.5rem;
+    height: 5.5rem;
+    margin: 0.3rem 0 0.5rem 1rem;
+  }
+
+  .intro-links {
+    clear: both;
   }
 
   .lede {
