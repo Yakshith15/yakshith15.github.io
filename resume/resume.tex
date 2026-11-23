@@ -131,8 +131,8 @@ Hyderabad, India\quad
         subscriber, then scaled it from a ceiling of 10K events at once to 300K in under
         90 minutes. No longer saving the full API
         record on every change also cut OpenSearch storage by 40\%.
-  \item Integrated gRPC into the Go service that enforces per-subscription quotas, replacing
-        its REST interface: p99 latency down \textasciitilde60\%, throughput roughly doubled.
+  \item Integrated gRPC into the global rate limiting service that enforces per-subscription
+        quotas, replacing its REST interface: p99 latency down \textasciitilde60\%, throughput roughly doubled.
 \end{itemize}
 
 \vspace{0.45em}

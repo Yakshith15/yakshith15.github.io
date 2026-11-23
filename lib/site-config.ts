@@ -43,7 +43,7 @@ export const work = {
       points: [
         "Built catalog search across ~4,000 production APIs, combining lexical (BM25) and semantic vector retrieval behind a per-query router. Relevance rose **~40%** over the lexical-only baseline.",
         "Built the analytics pipeline that attributes every request to an API, version, and subscriber, then scaled it from a ceiling of 10K events at once to **300K in under 90 minutes**. No longer saving the full API record on every change also cut OpenSearch storage by **40%**.",
-        "Integrated gRPC into the Go service that enforces per-subscription quotas, replacing its REST interface: p99 latency down **~60%**, throughput **roughly doubled**.",
+        "Integrated gRPC into the global rate limiting service that enforces per-subscription quotas, replacing its REST interface: p99 latency down **~60%**, throughput **roughly doubled**.",
       ],
     },
     {
