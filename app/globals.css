@@ -1,5 +1,5 @@
 /*
- * One centred column. Section titles sit above their content with a hairline
+ * One centred column, scaled up on large screens. Section titles sit above their content with a hairline
  * running out to the right edge; dates and status ride on the right of the
  * line they belong to, in small mono.
  */
@@ -17,7 +17,21 @@
   --accent: #10685c;
   --code-bg: #f1f0e9;
 
-  --page: 42rem;
+  --page: 46rem;
+}
+
+/* Large screens: scale the whole page up rather than stretching the
+   column, so lines stay a comfortable length and the margins shrink. */
+@media (min-width: 1200px) {
+  html {
+    font-size: 17px;
+  }
+}
+
+@media (min-width: 1440px) {
+  html {
+    font-size: 18px;
+  }
 }
 
 [data-theme="dark"] {
